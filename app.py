@@ -252,70 +252,174 @@ main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "🛠️ Lab", "📑 Refere
 
 # --- TAB 1: HOME (Rebranded & Sales Focused) ---
 with main_tabs[0]:
-    # --- HERO SECTION ---
+    # --- HERO SECTION (Centered & Unified) ---
     st.markdown("""
     <style>
+        .hero-container {
+            text-align: center;
+            padding: 3rem 0 2rem 0;
+            margin: 0 auto;
+            max-width: 900px;
+        }
         .hero-text {
-            background: linear-gradient(120deg, #1e3a8a, #007AFF);
+            background: linear-gradient(90deg, #1d1d1f 0%, #2563eb 50%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 3rem !important;
+            font-size: 3.8rem !important;
             font-weight: 800;
+            letter-spacing: -2px;
             line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            white-space: nowrap; /* Force single line */
         }
         .sub-hero {
-            font-size: 1.1rem !important;
+            font-size: 1.4rem !important;
             color: #6e6e73;
             font-weight: 500;
-            max-width: 600px;
+            letter-spacing: -0.5px;
         }
     </style>
-    <div style='padding: 2rem 0 2rem 0;'>
-        <div class="hero-text">Build the Brain.<br>Design the Future.</div>
-        <div class="sub-hero">The enterprise-grade AI training platform. From Neural Networks to GenAI, master the stack that powers the modern world.</div>
+    <div class="hero-container">
+        <div class="hero-text">Build the Brain. Design the Future.</div>
+        <div class="sub-hero">Zero Paywalls. 100% Open Source. The New Standard for AI Mastery.</div>
     </div>
     """, unsafe_allow_html=True)
     
-    col_cta1, col_cta2 = st.columns([1, 4])
-    with col_cta1:
-        st.button("🚀 Start Learning", key="hero_cta_main")
+    # Centered CTA
+    _, c_cta, _ = st.columns([1, 1, 1])
+    with c_cta:
+        st.button("🚀 Start Your Journey", key="hero_cta_main", use_container_width=True)
     
     st.markdown("---")
     
-    # --- FEATURE BENTO GRID ---
-    st.markdown("<h3 style='margin-bottom:1rem;'>The Nexus Toolkit</h3>", unsafe_allow_html=True)
+    # --- VIBRANT STYLING (Home Page Exclusive) ---
+    st.markdown("""
+    <style>
+        .vibrant-card {
+            padding: 1.5rem;
+            border-radius: 20px;
+            color: white;
+            height: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        .vibrant-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .card-blue { background: linear-gradient(135deg, #2563eb 0%, #00C6FF 100%); }
+        .card-purple { background: linear-gradient(135deg, #7c3aed 0%, #f43f5e 100%); }
+        .card-orange { background: linear-gradient(135deg, #f59e0b 0%, #ff6b6b 100%); }
+        .card-green { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); }
+        
+        .bento-icon-lg { font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.9; }
+        .bento-title-lg { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .bento-desc-lg { font-size: 0.9rem; opacity: 0.9; font-weight: 500; }
+        
+        .news-card-pro {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            height: 100%;
+            min-height: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            border: 1px solid rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+        .news-card-pro:hover { transform: translateY(-3px); }
+        .news-header {
+            padding: 12px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: white;
+        }
+        .news-body { padding: 16px; }
+        .news-date { color: #888; font-size: 11px; margin-bottom: 8px; display: block; }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # --- FEATURE BENTO GRID (Vibrant) ---
+    st.markdown("<h3 style='margin-bottom:1.5rem; font-weight:700;'>🚀 The Nexus Toolkit</h3>", unsafe_allow_html=True)
     cols = st.columns(4)
+    
     with cols[0]:
         st.markdown("""
-        <div class="bento-box bento-blue">
-            <div class="bento-icon">🦾</div>
-            <div class="bento-title">Core AI</div>
-            <div class="bento-desc">Math, Theory & Logic.</div>
+        <div class="vibrant-card card-blue">
+            <div class="bento-icon-lg">🦾</div>
+            <div class="bento-title-lg">Core AI</div>
+            <div class="bento-desc-lg">Math, Logic & Python.</div>
         </div>""", unsafe_allow_html=True)
+        
     with cols[1]:
         st.markdown("""
-        <div class="bento-box bento-purple">
-            <div class="bento-icon">🧠</div>
-            <div class="bento-title">Deep Learning</div>
-            <div class="bento-desc">CNNs, RNNs & Transformers.</div>
+        <div class="vibrant-card card-purple">
+            <div class="bento-icon-lg">🧠</div>
+            <div class="bento-title-lg">Deep Learning</div>
+            <div class="bento-desc-lg">CNNs & Transformers.</div>
         </div>""", unsafe_allow_html=True)
+        
     with cols[2]:
         st.markdown("""
-        <div class="bento-box bento-orange">
-            <div class="bento-icon">🎨</div>
-            <div class="bento-title">Generative</div>
-            <div class="bento-desc">Prompts & Diffusion.</div>
+        <div class="vibrant-card card-orange">
+            <div class="bento-icon-lg">🎨</div>
+            <div class="bento-title-lg">Generative</div>
+            <div class="bento-desc-lg">Prompts & Diffusion.</div>
         </div>""", unsafe_allow_html=True)
+        
     with cols[3]:
         st.markdown("""
-        <div class="bento-box bento-green">
-            <div class="bento-icon">⚡</div>
-            <div class="bento-title">Ops & Scale</div>
-            <div class="bento-desc">Deployment & Ethics.</div>
+        <div class="vibrant-card card-green">
+            <div class="bento-icon-lg">⚡</div>
+            <div class="bento-title-lg">Ops & Scale</div>
+            <div class="bento-desc-lg">Deploy & Ethics.</div>
         </div>""", unsafe_allow_html=True)
     
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- LATEST NEWS SECTION (Pro Cards) ---
+    st.markdown("<h3 style='margin-bottom:1.5rem; font-weight:700;'>📰 Live Intelligence Feed</h3>", unsafe_allow_html=True)
+    
+    news_items = [
+        {
+            "title": "Gemini 2.0: Multimodal King?",
+            "date": "DEC 10 • MODELS",
+            "grad": "linear-gradient(90deg, #4f46e5, #00C6FF)",
+            "text": "Google's new model crushes benchmarks. Is this the end of the text-only era?"
+        },
+        {
+            "title": "NVIDIA B200 Chips Arrive",
+            "date": "DEC 08 • HARDWARE",
+            "grad": "linear-gradient(90deg, #f59e0b, #ff6b6b)",
+            "text": "The 30x speed boost is real. Data centers are racing to upgrade for Trillion-param models."
+        },
+        {
+            "title": "New Global AI Safety Treaty",
+            "date": "DEC 05 • POLICY",
+            "grad": "linear-gradient(90deg, #10b981, #059669)",
+            "text": "15 Nations sign accord to ban autonomous weapons and limit generative deepfakes."
+        }
+    ]
+    
+    n_cols = st.columns(3)
+    for i, news in enumerate(news_items):
+        with n_cols[i]:
+            st.markdown(f"""
+            <div class="news-card-pro">
+                <div class="news-header" style="background: {news['grad']};">
+                    {news['date']}
+                </div>
+                <div class="news-body">
+                    <h4 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #111;">{news['title']}</h4>
+                    <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0;">{news['text']}</p>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- MISSION & CONTACT SECTION ---

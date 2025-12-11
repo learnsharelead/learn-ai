@@ -235,13 +235,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =============================================================================
-# HEADER
+# HEADER (New Brand Identity)
 # =============================================================================
-c_head1, c_head2 = st.columns([0.1, 0.9])
+c_head1, c_head2 = st.columns([0.15, 0.85])
 with c_head1:
-    st.markdown("<div style='font-size:24px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:28px; padding-top:2px;'>🧬</div>", unsafe_allow_html=True)
 with c_head2:
-    st.markdown("<h3 style='margin: 0; padding-top: 5px; font-weight: 700;'>AI Masterclass</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='margin: 0; padding-top: 5px; font-weight: 800; letter-spacing: -0.5px;'>NEXUS <span style='color:#6e6e73; font-weight:400;'>AI Academy</span></h3>", unsafe_allow_html=True)
 
 # =============================================================================
 # UNIFIED NAVIGATION (Vibrant Pills)
@@ -250,51 +250,112 @@ with c_head2:
 # Top-level Tabs
 main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "🛠️ Lab", "📑 Reference"])
 
-# --- TAB 1: HOME ---
+# --- TAB 1: HOME (Rebranded & Sales Focused) ---
 with main_tabs[0]:
-    # Ultra Compact Hero
-    c1, c2 = st.columns([1.5, 1])
-    with c1:
-        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
-        st.markdown("<h1 style='font-size: 2.5rem !important;'>Master AI.<br>Design the Future.</h1>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #666;'>Interactive learning. Zero fluff.</p>", unsafe_allow_html=True)
-        st.button("Start Now ⚡", key="hero_start")
+    # --- HERO SECTION ---
+    st.markdown("""
+    <style>
+        .hero-text {
+            background: linear-gradient(120deg, #1e3a8a, #007AFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem !important;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+        .sub-hero {
+            font-size: 1.1rem !important;
+            color: #6e6e73;
+            font-weight: 500;
+            max-width: 600px;
+        }
+    </style>
+    <div style='padding: 2rem 0 2rem 0;'>
+        <div class="hero-text">Build the Brain.<br>Design the Future.</div>
+        <div class="sub-hero">The enterprise-grade AI training platform. From Neural Networks to GenAI, master the stack that powers the modern world.</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col_cta1, col_cta2 = st.columns([1, 4])
+    with col_cta1:
+        st.button("🚀 Start Learning", key="hero_cta_main")
     
     st.markdown("---")
     
-    # Colorful Bento Grid
-    st.markdown("### Your Toolkit")
+    # --- FEATURE BENTO GRID ---
+    st.markdown("<h3 style='margin-bottom:1rem;'>The Nexus Toolkit</h3>", unsafe_allow_html=True)
     cols = st.columns(4)
     with cols[0]:
         st.markdown("""
         <div class="bento-box bento-blue">
-            <div class="bento-icon">🤖</div>
-            <div class="bento-title">Fundamentals</div>
-            <div class="bento-desc">Zero to Hero. Logic & Math.</div>
+            <div class="bento-icon">🦾</div>
+            <div class="bento-title">Core AI</div>
+            <div class="bento-desc">Math, Theory & Logic.</div>
         </div>""", unsafe_allow_html=True)
     with cols[1]:
         st.markdown("""
         <div class="bento-box bento-purple">
             <div class="bento-icon">🧠</div>
-            <div class="bento-title">Neural Nets</div>
-            <div class="bento-desc">Build your own Brain.</div>
+            <div class="bento-title">Deep Learning</div>
+            <div class="bento-desc">CNNs, RNNs & Transformers.</div>
         </div>""", unsafe_allow_html=True)
     with cols[2]:
         st.markdown("""
         <div class="bento-box bento-orange">
             <div class="bento-icon">🎨</div>
-            <div class="bento-title">Generative AI</div>
-            <div class="bento-desc">LLMs & Diffusion.</div>
+            <div class="bento-title">Generative</div>
+            <div class="bento-desc">Prompts & Diffusion.</div>
         </div>""", unsafe_allow_html=True)
     with cols[3]:
         st.markdown("""
         <div class="bento-box bento-green">
-            <div class="bento-icon">📊</div>
-            <div class="bento-title">Data Lab</div>
-            <div class="bento-desc">Real-world projects.</div>
+            <div class="bento-icon">⚡</div>
+            <div class="bento-title">Ops & Scale</div>
+            <div class="bento-desc">Deployment & Ethics.</div>
         </div>""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- MISSION & CONTACT SECTION ---
+    c_mission, c_contact = st.columns([2, 1])
+    
+    with c_mission:
+        st.markdown("""
+        <div class="content-card">
+            <h3 style="margin-top:0;">🌐 Open Learning Initiative</h3>
+            <p><strong>Education should be free and accessible to all.</strong></p>
+            <p style="font-size:14px; color:#444;">
+                Nexus AI is dedicated to democratizing Artificial Intelligence education. 
+                No paywalls, no hidden fees—just pure, high-quality knowledge for the curious mind.
+                Whether you're a student, researcher, or hobbyist, this platform is your open playground.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with c_contact:
+        st.markdown("""
+        <div class="content-card" style="background:#1d1d1f !important; color:white !important;">
+            <h3 style="margin-top:0; color:white !important;">📬 Connect</h3>
+            <p style="color:#a1a1a6 !important;">Feedback? Questions? Ideas?</p>
+            <div style="margin-top:15px; font-size:13px; color:#ffffff;">
+                <b>Vikas Singh</b><br>
+                Creator & Educator<br>
+                <br>
+                ✉️ <a href="mailto:vikas.singh.info@gmail.com" style="color:#2997ff; text-decoration:none;">vikas.singh.info@gmail.com</a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # --- FOOTER ---
+    st.markdown("""
+    <div style="text-align: center; margin-top: 3rem; color: #86868b; font-size: 12px;">
+        <hr>
+        &copy; 2025 Vikas Singh • Made with ❤️ for the AI Community<br>
+        Designed with 🧬 Nexus Design System v2.0
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # --- TAB 2: CURRICULUM ---

@@ -9,3 +9,4 @@ plotly
 nltk
 streamlit-ace
 scipy
+streamlit-option-menu

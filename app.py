@@ -6,7 +6,8 @@ from modules import (
     model_evaluation, ai_ethics, time_series, reinforcement_learning,
     mlops, advanced_nlp, recommendation_systems, kaggle_guide, research_papers,
     quiz_system, progress_dashboard, code_playground, upload_data,
-    video_tutorials, cheatsheet, interview_prep
+    video_tutorials, cheatsheet, interview_prep, model_arena, nexus_tutor, prompt_lab,
+    neural_viz_3d
 )
 
 # =============================================================================
@@ -248,7 +249,10 @@ with c_head2:
 # =============================================================================
 
 # Top-level Tabs
-main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "🛠️ Lab", "📑 Reference"])
+main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "🛠️ Lab", "📑 Reference", "📊 Dashboard"])
+
+# --- SIDEBAR TUTOR ---
+nexus_tutor.show()
 
 # --- TAB 1: HOME (Rebranded & Sales Focused) ---
 with main_tabs[0]:
@@ -288,13 +292,15 @@ with main_tabs[0]:
     # Centered CTA
     _, c_cta, _ = st.columns([1, 1, 1])
     with c_cta:
+        # Link to Dashboard or Curriculum
         st.button("🚀 Start Your Journey", key="hero_cta_main", use_container_width=True)
     
     st.markdown("---")
     
-    # --- VIBRANT STYLING (Home Page Exclusive) ---
+    # --- VIBRANT STYLING (Home Page Exclusive & Mobile Responsive) ---
     st.markdown("""
     <style>
+        /* Desktop First Styles */
         .vibrant-card {
             padding: 1.5rem;
             border-radius: 20px;
@@ -304,11 +310,13 @@ with main_tabs[0]:
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
+            margin-bottom: 1rem; /* Spacing for mobile stack */
         }
         .vibrant-card:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
+        
         .card-blue { background: linear-gradient(135deg, #2563eb 0%, #00C6FF 100%); }
         .card-purple { background: linear-gradient(135deg, #7c3aed 0%, #f43f5e 100%); }
         .card-orange { background: linear-gradient(135deg, #f59e0b 0%, #ff6b6b 100%); }
@@ -318,6 +326,7 @@ with main_tabs[0]:
         .bento-title-lg { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.2rem; }
         .bento-desc-lg { font-size: 0.9rem; opacity: 0.9; font-weight: 500; }
         
+        /* News Cards */
         .news-card-pro {
             background: white;
             border-radius: 16px;
@@ -328,6 +337,7 @@ with main_tabs[0]:
             transition: transform 0.2s;
             border: 1px solid rgba(0,0,0,0.03);
             overflow: hidden;
+            margin-bottom: 1rem; /* Spacing for mobile stack */
         }
         .news-card-pro:hover { transform: translateY(-3px); }
         .news-header {
@@ -340,6 +350,42 @@ with main_tabs[0]:
         }
         .news-body { padding: 16px; }
         .news-date { color: #888; font-size: 11px; margin-bottom: 8px; display: block; }
+
+        /* --- MOBILE REFINEMENTS (Max Width 768px) --- */
+        @media only screen and (max-width: 768px) {
+            /* Hero adjustments */
+            .hero-text {
+                font-size: 2.2rem !important; /* Smaller headline */
+                white-space: normal !important; /* Allow wrapping */
+                line-height: 1.2 !important;
+            }
+            .sub-hero {
+                font-size: 1.1rem !important;
+                padding: 0 1rem; /* Add breathing room */
+            }
+            .hero-container {
+                padding: 1rem 0 1rem 0;
+            }
+            
+            /* Card compacting */
+            .vibrant-card {
+                padding: 1.2rem;
+                min-height: auto;
+            }
+            .bento-icon-lg { font-size: 2.5rem; }
+            
+            /* General container padding reduction */
+            .block-container {
+                padding-top: 2rem !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            /* Hide non-essential elements if needed */
+            .bento-desc-lg {
+                font-size: 0.85rem;
+            }
+        }
     </style>
     """, unsafe_allow_html=True)
     
@@ -466,8 +512,8 @@ with main_tabs[0]:
 with main_tabs[1]:
     # Nested Tabs for Modules
     mod_tabs = st.tabs([
-        "Fundamentals", "Data", "Supervised", "Unsupervised", 
-        "Neural Nets", "NLP", "Generative AI", "Ethics"
+        "Fundamentals", "Data", "Supervised", "Unsupervised", "Neural Nets", 
+        "Computer Vision", "NLP", "Advanced NLP", "Time Series", "Rec Sys", "Reinforcement", "Generative AI", "Ethics"
     ])
     
     with mod_tabs[0]: introduction.show()
@@ -475,18 +521,26 @@ with main_tabs[1]:
     with mod_tabs[2]: supervised_learning.show()
     with mod_tabs[3]: unsupervised_learning.show()
     with mod_tabs[4]: neural_networks.show()
-    with mod_tabs[5]: nlp_basics.show()
-    with mod_tabs[6]: generative_ai.show()
-    with mod_tabs[7]: ai_ethics.show()
+    with mod_tabs[5]: computer_vision.show()
+    with mod_tabs[6]: nlp_basics.show()
+    with mod_tabs[7]: advanced_nlp.show()
+    with mod_tabs[8]: time_series.show()
+    with mod_tabs[9]: recommendation_systems.show()
+    with mod_tabs[10]: reinforcement_learning.show()
+    with mod_tabs[11]: generative_ai.show()
+    with mod_tabs[12]: ai_ethics.show()
 
 
 # --- TAB 3: LAB ---
 with main_tabs[2]:
-    lab_tabs = st.tabs(["Playground", "Quiz", "Upload", "Projects"])
-    with lab_tabs[0]: code_playground.show()
-    with lab_tabs[1]: quiz_system.show()
-    with lab_tabs[2]: upload_data.show()
-    with lab_tabs[3]: projects.show()
+    lab_tabs = st.tabs(["⚔️ Arena", "🧊 3D Net", "🧪 Prompt Lab", "Playground", "Quiz", "Upload", "Projects"])
+    with lab_tabs[0]: model_arena.show()
+    with lab_tabs[1]: neural_viz_3d.show()
+    with lab_tabs[2]: prompt_lab.show()
+    with lab_tabs[3]: code_playground.show()
+    with lab_tabs[4]: quiz_system.show()
+    with lab_tabs[5]: upload_data.show()
+    with lab_tabs[6]: projects.show()
 
 
 # --- TAB 4: REFERENCE ---
@@ -497,6 +551,10 @@ with main_tabs[3]:
     with ref_tabs[2]: interview_prep.show()
     with ref_tabs[3]: research_papers.show()
     with ref_tabs[4]: mlops.show()
+
+# --- TAB 5: DASHBOARD ---
+with main_tabs[4]:
+    progress_dashboard.show()
 
 # =============================================================================
 # GLOBAL FOOTER

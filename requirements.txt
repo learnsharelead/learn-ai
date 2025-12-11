@@ -11,3 +11,4 @@ streamlit-ace
 scipy
 streamlit-option-menu
 graphviz
+networkx

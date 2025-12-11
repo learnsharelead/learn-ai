@@ -29,7 +29,9 @@ def show():
         ]
         
         for name, desc in metrics:
-            st.metric(name, desc)
+            st.markdown(f"**{name}**")
+            st.info(desc)
+            st.markdown("---")
 
     # TAB 2: Load Testing
     with tabs[1]:

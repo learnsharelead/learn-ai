@@ -1,0 +1,8 @@
+[messages_control]
+disable = C0111, C0103, W0621
+# C0111: missing-docstring
+# C0103: invalid-name (Streamlit uses variable names freely)
+# W0621: redefined-outer-name
+
+[format]
+max-line-length = 120

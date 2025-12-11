@@ -1,0 +1,11 @@
+streamlit
+scikit-learn
+# tensorflow
+# keras
+numpy
+pandas
+matplotlib
+plotly
+nltk
+streamlit-ace
+scipy

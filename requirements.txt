@@ -1,7 +1,5 @@
 streamlit
 scikit-learn
-# tensorflow
-# keras
 numpy
 pandas
 matplotlib
@@ -12,3 +10,44 @@ scipy
 streamlit-option-menu
 graphviz
 networkx
+altair
+pytest
+
+# AI Providers
+openai
+google-generativeai
+anthropic
+
+# LangChain Ecosystem
+langchain
+langchain-openai
+langchain-community
+langchain-core
+langchain-chroma
+langgraph
+
+# Vector DBs
+chromadb
+pinecone-client
+qdrant-client
+
+# RAG & Evaluation
+ragas
+datasets
+
+# Agents & Tools
+mcp
+crewai
+pyautogen
+
+# Testing & Observability
+locust
+fairlearn
+
+# Deep Learning (Optional - Heavy)
+# torch
+# transformers
+# peft
+# bitsandbytes
+# trl
+# guardrails-ai

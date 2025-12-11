@@ -7,7 +7,12 @@ from modules import (
     mlops, advanced_nlp, recommendation_systems, kaggle_guide, research_papers,
     quiz_system, progress_dashboard, code_playground, upload_data,
     video_tutorials, cheatsheet, interview_prep, model_arena, nexus_tutor, prompt_lab,
-    neural_viz_3d
+    neural_viz_3d,
+    # Developer Track
+    ai_dev_stack, langchain_langraph, rag_tutorial, agentic_ai, mcp_tutorial, ai_testing,
+    fine_tuning, ai_security, multimodal_ai, red_teaming, bias_fairness,
+    cost_optimization, observability, openai_assistants, tools_deep_dive,
+    multi_agent_systems, synthetic_data, performance_testing, ab_testing
 )
 
 # =============================================================================
@@ -249,7 +254,7 @@ with c_head2:
 # =============================================================================
 
 # Top-level Tabs
-main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "🛠️ Lab", "📑 Reference", "📊 Dashboard"])
+main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "💻 Developers", "🛠️ Lab", "📑 Reference", "📊 Dashboard"])
 
 # --- SIDEBAR TUTOR ---
 nexus_tutor.show()
@@ -502,8 +507,7 @@ with main_tabs[0]:
     st.markdown("""
     <div style="text-align: center; margin-top: 3rem; color: #86868b; font-size: 12px;">
         <hr>
-        &copy; 2025 Vikas Singh • Made with ❤️ for the AI Community<br>
-        Designed with 🧬 Nexus Design System v2.0
+        &copy; 2025 vikas.singh.info@gmail.com • Made with ❤️ for the AI Community
     </div>
     """, unsafe_allow_html=True)
 
@@ -531,8 +535,41 @@ with main_tabs[1]:
     with mod_tabs[12]: ai_ethics.show()
 
 
-# --- TAB 3: LAB ---
+# --- TAB 3: DEVELOPER TRACK ---
 with main_tabs[2]:
+    st.markdown("""
+    ### 💻 Developer & Tester Track
+    Build production-grade AI applications. From API calls to Agentic systems.
+    """)
+    dev_tabs = st.tabs([
+        "🛠️ AI Stack", "🔗 LangChain", "📚 RAG", "🤖 Agents", "🔌 MCP", "🧪 Testing",
+        "🎛️ Fine-Tuning", "🔐 Security", "👁️ Multi-Modal", "🔴 Red Teaming", "⚖️ Fairness",
+        "💰 Cost Opt", "📊 Observability", "🤖 Assistants API", "🛠️ Deep Dives",
+        "👥 Multi-Agent", "🎲 Synthetic Data", "⚡ Perf Test", "📈 A/B Test"
+    ])
+    with dev_tabs[0]: ai_dev_stack.show()
+    with dev_tabs[1]: langchain_langraph.show()
+    with dev_tabs[2]: rag_tutorial.show()
+    with dev_tabs[3]: agentic_ai.show()
+    with dev_tabs[4]: mcp_tutorial.show()
+    with dev_tabs[5]: ai_testing.show()
+    with dev_tabs[6]: fine_tuning.show()
+    with dev_tabs[7]: ai_security.show()
+    with dev_tabs[8]: multimodal_ai.show()
+    with dev_tabs[9]: red_teaming.show()
+    with dev_tabs[10]: bias_fairness.show()
+    with dev_tabs[11]: cost_optimization.show()
+    with dev_tabs[12]: observability.show()
+    with dev_tabs[13]: openai_assistants.show()
+    with dev_tabs[14]: tools_deep_dive.show()
+    with dev_tabs[15]: multi_agent_systems.show()
+    with dev_tabs[16]: synthetic_data.show()
+    with dev_tabs[17]: performance_testing.show()
+    with dev_tabs[18]: ab_testing.show()
+
+
+# --- TAB 4: LAB ---
+with main_tabs[3]:
     lab_tabs = st.tabs(["⚔️ Arena", "🧊 3D Net", "🧪 Prompt Lab", "Playground", "Quiz", "Upload", "Projects"])
     with lab_tabs[0]: model_arena.show()
     with lab_tabs[1]: neural_viz_3d.show()
@@ -543,8 +580,8 @@ with main_tabs[2]:
     with lab_tabs[6]: projects.show()
 
 
-# --- TAB 4: REFERENCE ---
-with main_tabs[3]:
+# --- TAB 5: REFERENCE ---
+with main_tabs[4]:
     ref_tabs = st.tabs(["CheatSheet", "Videos", "Interviews", "Papers", "MLOps"])
     with ref_tabs[0]: cheatsheet.show()
     with ref_tabs[1]: video_tutorials.show()
@@ -552,8 +589,8 @@ with main_tabs[3]:
     with ref_tabs[3]: research_papers.show()
     with ref_tabs[4]: mlops.show()
 
-# --- TAB 5: DASHBOARD ---
-with main_tabs[4]:
+# --- TAB 6: DASHBOARD ---
+with main_tabs[5]:
     progress_dashboard.show()
 
 # =============================================================================
@@ -561,7 +598,7 @@ with main_tabs[4]:
 # =============================================================================
 st.markdown("""
 <div style="text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #e5e5ea; color: #86868b; font-size: 12px;">
-    Copyright © 2025 AI Masterclass Inc. All rights reserved. <br>
+    Copyright © 2025 vikas.singh.info@gmail.com. All rights reserved. <br>
     <a href="#" style="color: #86868b; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
     <a href="#" style="color: #86868b; text-decoration: none; margin: 0 10px;">Terms of Use</a>
     <a href="#" style="color: #86868b; text-decoration: none; margin: 0 10px;">Site Map</a>

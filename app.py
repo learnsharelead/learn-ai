@@ -27,7 +27,8 @@ from modules import (
 # =============================================================================
 # PAGE CONFIGURATION
 # =============================================================================
-    page_title="Synapse AI",
+st.set_page_config(
+    page_title="Veda AI",
     page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"

@@ -1,10 +1,22 @@
 import streamlit as st
 
+# Helper for resilient video rendering
+def render_video(url, caption):
+    st.subheader(caption.split(" - ")[0] if " - " in caption else caption)
+    try:
+        st.video(url)
+    except:
+        st.error("Video error")
+    
+    st.caption(caption)
+    st.link_button("📺 Watch on YouTube", url)
+
 def show():
     st.title("📹 Video Tutorials")
     
     st.markdown("""
     Learn from curated video content! Each video is selected to complement the written tutorials.
+    **Note:** If a video says "Unavailable", click the **Watch on YouTube** button.
     """)
     
     # Video categories updated with new tracks
@@ -17,14 +29,10 @@ def show():
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("What is Machine Learning?")
-            st.video("https://www.youtube.com/watch?v=ukzFI9rgwfU")
-            st.caption("Google - A beginner-friendly introduction (7 min)")
+            render_video("https://www.youtube.com/watch?v=ukzFI9rgwfU", "Google - A beginner-friendly introduction")
             
         with col2:
-            st.subheader("AI vs ML vs Deep Learning")
-            st.video("https://www.youtube.com/watch?v=4RixMPF4xis")
-            st.caption("IBM Technology - Clear explanation of differences (6 min)")
+            render_video("https://www.youtube.com/watch?v=4RixMPF4xis", "IBM Technology - AI vs ML vs DL")
         
         st.markdown("---")
         
@@ -137,28 +145,20 @@ def show():
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("LangChain Course (FreeCodeCamp)")
-            st.video("https://www.youtube.com/watch?v=dyGTdb7qYKQ") 
-            st.caption("FreeCodeCamp - Full LangChain & Vector DB Course")
+            render_video("https://www.youtube.com/watch?v=dyGTdb7qYKQ", "FreeCodeCamp - Full LangChain Course")
             
         with col2:
-            st.subheader("What are AI Agents?")
-            st.video("https://www.youtube.com/watch?v=QAwV2V91y2U") 
-            st.caption("Simplilearn - AI Agents Explained")
+            render_video("https://www.youtube.com/watch?v=QAwV2V91y2U", "Simplilearn - AI Agents Explained")
             
         st.markdown("---")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("Vector Databases (Fireship)")
-            st.video("https://www.youtube.com/watch?v=klTvEwg3oJk")
-            st.caption("Fireship - Vector DBs in 100 Seconds")
+            render_video("https://www.youtube.com/watch?v=klTvEwg3oJk", "Fireship - Vector DBs in 100s")
             
         with col2:
-            st.subheader("Build a RAG Chatbot")
-            st.video("https://www.youtube.com/watch?v=Lcn9Ngj0QNA")
-            st.caption("Alejandro AO - RAG Chatbot from Scratch")
+            render_video("https://www.youtube.com/watch?v=Lcn9Ngj0QNA", "Alejandro AO - RAG Chatbot From Scratch")
 
     # Testers Track
     with tabs[5]:
@@ -167,28 +167,20 @@ def show():
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("RAG Explained (Edureka)")
-            st.video("https://www.youtube.com/watch?v=mnJO57Xg7gw")
-            st.caption("Edureka - RAG Tutorial")
+            render_video("https://www.youtube.com/watch?v=mnJO57Xg7gw", "Edureka - RAG Tutorial")
             
         with col2:
-            st.subheader("Red Teaming (Google)")
-            st.video("https://www.youtube.com/watch?v=l_6j_8_0-w4") # Google SAIF
-            st.caption("Google - Secure AI Framework")
+            render_video("https://www.youtube.com/watch?v=l_6j_8_0-w4", "Google - Secure AI Framework")
             
         st.markdown("---")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("Prompt Injection Attacks")
-            st.video("https://www.youtube.com/watch?v=zJg5b25qL6c")
-            st.caption("Computerphile - Prompt Injection Explained")
+            render_video("https://www.youtube.com/watch?v=zJg5b25qL6c", "Computerphile - Prompt Injection")
             
         with col2:
-            st.subheader("AI Bias & Fairness")
-            st.video("https://www.youtube.com/watch?v=5xvNIPc24jo")
-            st.caption("Google Cloud Tech - AI Fairness Explained")
+            render_video("https://www.youtube.com/watch?v=5xvNIPc24jo", "Google Cloud - AI Fairness")
     
     # Career
     with tabs[6]:

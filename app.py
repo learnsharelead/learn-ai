@@ -385,11 +385,33 @@ selected_nav = option_menu(
 
 
 
+# --- CSS TO FORCE SIDEBAR VISIBILITY ---
+st.markdown("""
+<style>
+    /* Force Sidebar Toggle to be visible */
+    [data-testid="stSidebarNav"] { display: none; }
+    [data-testid="stSidebar"] { display: block; }
+    section[data-testid="stSidebar"] > div { padding-top: 2rem; }
+    
+    /* Highlight the toggle button */
+    [data-testid="stSidebarCollapsedControl"] {
+        color: #3b82f6 !important;
+        transform: scale(1.5);
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # --- SIDEBAR TUTOR ---
+with st.sidebar:
+    st.info("👈 **Nexus Tutor is here!**")
 nexus_tutor.show()
 
 # --- HOME TAB ---
 if st.session_state.nav_selection == "🏠 Home":
+    # Debug/Help Button
+    if st.button("🤖 Open AI Tutor (Click Arrow/Sidebar >)", type="primary"):
+        st.toast("Look at the left sidebar! click the '>' arrow.")
+
     # --- HERO SECTION ---
     st.markdown("""
 <div style="text-align: center; padding: 5rem 0 4rem 0; animation: fadein 1s;">

@@ -28,7 +28,7 @@ from modules import (
 # PAGE CONFIGURATION
 # =============================================================================
 st.set_page_config(
-    page_title="AI Nexus Academy",
+    page_title="Veda AI",
     page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -355,8 +355,8 @@ with c_head2:
 # UNIFIED NAVIGATION (Controllable State)
 # =============================================================================
 
-# Define Navigation Options
-nav_options = ["🏠 Home", "📚 Curriculum", "💻 Developers", "🛠️ Lab", "📑 Reference", "📊 Dashboard"]
+# Define Navigation Options (Text Only, Icons handled by option_menu)
+nav_options = ["Home", "Curriculum", "Developers", "Lab", "Reference", "Dashboard"]
 icons = ["house", "book", "laptop", "tools", "file-text", "bar-chart"]
 
 # Navigation State Management
@@ -389,7 +389,7 @@ selected_nav = option_menu(
 nexus_tutor.show()
 
 # --- HOME TAB ---
-if st.session_state.nav_selection == "🏠 Home":
+if st.session_state.nav_selection == "Home":
     # --- HERO SECTION ---
     st.markdown("""
 <div style="text-align: center; padding: 5rem 0 4rem 0; animation: fadein 1s;">
@@ -405,7 +405,7 @@ background: linear-gradient(135deg, #111827 0%, #3b82f6 50%, #7c3aed 100%);
 line-height: 1.1;
 filter: drop-shadow(0 2px 10px rgba(59,130,246,0.1));
 ">
-The AI Nexus
+Veda AI
 </h1>
 <!-- Subheadline -->
 <p style="
@@ -417,7 +417,7 @@ line-height: 1.3;
 font-weight: 500;
 letter-spacing: -0.01em;
 ">
-Master the <span style="color: #2563eb; font-weight: 700;">Engineering Stack</span> for the <span style="background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Artificial Intelligence Revolution</span>.
+The Ultimate <span style="color: #2563eb; font-weight: 700;">Knowledge Hub</span> for the <span style="background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Artificial Intelligence Revolution</span>.
 </p>
 <!-- Feature Badge -->
 <div style="display: flex; justify-content: center;">
@@ -448,10 +448,10 @@ transition: transform 0.2s ease;
     
     # Ultra-Compact Layout: 4 Columns in 1 Row
     modules_map = [
-        {"icon": "🎓", "title": "Academy", "desc": "Theory & Deep Learning", "bg": "#eff6ff", "border": "#bfdbfe", "shadow": "rgba(59, 130, 246, 0.1)", "target": "📚 Curriculum"},
-        {"icon": "💻", "title": "Dev Track", "desc": "RAG, Agents & MCP", "bg": "#f5f3ff", "border": "#ddd6fe", "shadow": "rgba(139, 92, 246, 0.1)", "target": "💻 Developers"},
-        {"icon": "🛠️", "title": "Neural Lab", "desc": "Arena, 3D & Playground", "bg": "#fff7ed", "border": "#fed7aa", "shadow": "rgba(249, 115, 22, 0.1)", "target": "🛠️ Lab"},
-        {"icon": "🧠", "title": "Research", "desc": "Papers & Reference", "bg": "#f0fdf4", "border": "#bbf7d0", "shadow": "rgba(16, 185, 129, 0.1)", "target": "📑 Reference"}
+        {"icon": "🎓", "title": "Academy", "desc": "Theory & Deep Learning", "bg": "#eff6ff", "border": "#bfdbfe", "shadow": "rgba(59, 130, 246, 0.1)", "target": "Curriculum"},
+        {"icon": "💻", "title": "Dev Track", "desc": "RAG, Agents & MCP", "bg": "#f5f3ff", "border": "#ddd6fe", "shadow": "rgba(139, 92, 246, 0.1)", "target": "Developers"},
+        {"icon": "🛠️", "title": "Neural Lab", "desc": "Arena, 3D & Playground", "bg": "#fff7ed", "border": "#fed7aa", "shadow": "rgba(249, 115, 22, 0.1)", "target": "Lab"},
+        {"icon": "🧠", "title": "Research", "desc": "Papers & Reference", "bg": "#f0fdf4", "border": "#bbf7d0", "shadow": "rgba(16, 185, 129, 0.1)", "target": "Reference"}
     ]
     
     # Responsive Grid: 4 columns on desktop, automatically stacks on mobile
@@ -528,7 +528,7 @@ transition: transform 0.2s ease;
     components.html(carousel_html, height=400, scrolling=False)
 
 # --- TAB 2: CURRICULUM ---
-if st.session_state.nav_selection == "📚 Curriculum":
+if st.session_state.nav_selection == "Curriculum":
     # Nested Tabs for Modules
     mod_tabs = st.tabs([
         "Fundamentals", "Data", "Supervised", "Unsupervised", "Neural Nets", 
@@ -551,7 +551,7 @@ if st.session_state.nav_selection == "📚 Curriculum":
 
 
 # --- TAB 3: DEVELOPER TRACK ---
-if st.session_state.nav_selection == "💻 Developers":
+if st.session_state.nav_selection == "Developers":
     st.markdown("""
     ### 💻 Developer & Tester Track
     Build production-grade AI applications. From API calls to Agentic systems.
@@ -584,7 +584,7 @@ if st.session_state.nav_selection == "💻 Developers":
 
 
 # --- TAB 4: LAB ---
-if st.session_state.nav_selection == "🛠️ Lab":
+if st.session_state.nav_selection == "Lab":
     lab_tabs = st.tabs(["⚔️ Arena", "🧊 3D Net", "🧪 Prompt Lab", "Playground", "Quiz", "Upload", "Projects"])
     with lab_tabs[0]: model_arena.show()
     with lab_tabs[1]: neural_viz_3d.show()
@@ -596,7 +596,7 @@ if st.session_state.nav_selection == "🛠️ Lab":
 
 
 # --- TAB 5: REFERENCE ---
-if st.session_state.nav_selection == "📑 Reference":
+if st.session_state.nav_selection == "Reference":
     ref_tabs = st.tabs(["CheatSheet", "Videos", "Interviews", "Papers", "MLOps"])
     with ref_tabs[0]: cheatsheet.show()
     with ref_tabs[1]: video_tutorials.show()
@@ -605,7 +605,7 @@ if st.session_state.nav_selection == "📑 Reference":
     with ref_tabs[4]: mlops.show()
 
 # --- TAB 6: DASHBOARD ---
-if st.session_state.nav_selection == "📊 Dashboard":
+if st.session_state.nav_selection == "Dashboard":
     progress_dashboard.show()
 
 # =============================================================================

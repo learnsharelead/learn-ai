@@ -364,7 +364,7 @@ with c_head2:
 
 # Define Navigation Options (Text Only, Icons handled by option_menu)
 nav_options = ["Home", "Curriculum", "Developers", "Lab", "Reference", "Dashboard"]
-icons = ["house", "book", "laptop", "tools", "file-text", "bar-chart"]
+icons = ["house-door-fill", "layers-fill", "terminal-fill", "lightning-charge-fill", "collection-play-fill", "speedometer2"]
 
 # Navigation State Management
 if 'nav_selection' not in st.session_state:

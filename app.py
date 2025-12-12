@@ -364,7 +364,7 @@ with c_head2:
 
 # Define Navigation Options (Text Only, Icons handled by option_menu)
 nav_options = ["Home", "Curriculum", "Developers", "Lab", "Reference", "Dashboard"]
-icons = ["house-door-fill", "layers-fill", "terminal-fill", "lightning-charge-fill", "collection-play-fill", "speedometer2"]
+icons = ["house-fill", "journal-code", "code-slash", "cpu-fill", "archive-fill", "grid-1x2-fill"]
 
 # Navigation State Management
 if 'nav_selection' not in st.session_state:
@@ -388,7 +388,7 @@ selected_nav = option_menu(
             "box-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)",
             "border": "1px solid rgba(0,0,0,0.05)"
         },
-        "icon": {"color": "#64748b", "font-size": "18px"}, 
+        "icon": {"font-size": "18px"}, # Color removed to allow inheritance
         "nav-link": {
             "font-size": "16px", 
             "text-align": "center", 
@@ -397,7 +397,7 @@ selected_nav = option_menu(
             "border-radius": "10px",
             "padding": "10px 16px",
             "font-weight": "500",
-            "color": "#4b5563"
+            "color": "#64748b" # Default color set here
         },
         "nav-link-selected": {
             "background-color": "#2563eb", 

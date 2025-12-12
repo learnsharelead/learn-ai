@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.graph_objects as go
+from utils.audio_manager import listen_section
 
 def show():
     st.title("🤖 Module 1: What is AI?")
@@ -14,7 +15,7 @@ def show():
     with tabs[0]:
         st.header("🌟 What is AI? (The Simple Version)")
         
-        st.markdown("""
+        intro_content = """
         ### Imagine Teaching a Child...
         
         Think about how you learned to recognize a **cat** when you were little:
@@ -25,7 +26,9 @@ def show():
         4. ✅ Now you can recognize ANY cat, even ones you've never seen!
         
         **That's exactly how AI learns!** 🎉
-        """)
+        """
+        listen_section("Intro to AI", intro_content.replace("*", ""))
+        st.markdown(intro_content)
         
         st.markdown("---")
         

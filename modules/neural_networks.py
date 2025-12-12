@@ -4,13 +4,17 @@ import time
 import plotly.graph_objects as go
 import random
 
+from utils.audio_manager import listen_section
+
 def show():
     st.title("🧠 Module 5: Neural Networks & Deep Learning")
     
-    st.markdown("""
+    intro_content = """
     ### From Biological Neurons to PyTorch Code
     Deep learning powers ChatGPT, Midjourney, and Self-Driving Cars. Let's understand how.
-    """)
+    """
+    listen_section("Neural Nets Intro", intro_content.replace("#", ""))
+    st.markdown(intro_content)
     
     tabs = st.tabs([
         "🧠 Theory", 
@@ -23,6 +27,21 @@ def show():
     # TAB 1: Theory
     with tabs[0]:
         st.header("🧠 Inspired by the Brain")
+        
+        theory_content = """
+        Thinking about how Biological Neurons work helps us build Artificial ones.
+        
+        **Biological Neuron:**
+        - **Dendrites**: Receive signals
+        - **Soma**: Process signals
+        - **Axon**: Send output
+        
+        **Artificial Neuron:**
+        - **Inputs (x)**: The data features
+        - **Weights (w)**: The importance of each feature
+        - **Bias (b)**: The activation threshold
+        """
+        listen_section("Theory: Bio vs Artificial", theory_content.replace("*", ""))
         
         col1, col2 = st.columns(2)
         with col1:

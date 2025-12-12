@@ -345,7 +345,7 @@ c_head1, c_head2 = st.columns([0.15, 0.85])
 with c_head1:
     st.markdown("<div style='font-size:28px; padding-top:2px;'>🧬</div>", unsafe_allow_html=True)
 with c_head2:
-    st.markdown("<h3 style='margin: 0; padding-top: 5px; font-weight: 800; letter-spacing: -0.5px;'>NEXUS <span style='color:#6e6e73; font-weight:400;'>AI Academy</span></h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='margin: 0; padding-top: 5px; font-weight: 800; letter-spacing: -0.5px;'>Veda <span style='color:#3b82f6; font-weight:400;'>AI</span></h3>", unsafe_allow_html=True)
 
 # =============================================================================
 # UNIFIED NAVIGATION (Vibrant Pills)
@@ -419,24 +419,6 @@ letter-spacing: -0.01em;
 ">
 The Ultimate <span style="color: #2563eb; font-weight: 700;">Knowledge Hub</span> for the <span style="background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Artificial Intelligence Revolution</span>.
 </p>
-<!-- Feature Badge -->
-<div style="display: flex; justify-content: center;">
-<div style="
-background: rgba(255, 255, 255, 0.8);
-backdrop-filter: blur(12px);
-border: 1px solid rgba(0,0,0,0.08);
-padding: 8px 20px;
-border-radius: 9999px;
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-display: inline-flex;
-align-items: center;
-gap: 8px;
-transition: transform 0.2s ease;
-">
-<span style="display:block; width:8px; height:8px; background-color:#10b981; border-radius:50%; box-shadow: 0 0 0 2px rgba(16,185,129,0.2);"></span>
-<span style="background: linear-gradient(90deg, #10b981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; font-size: 0.95rem;">Completely Free & Open Source</span>
-</div>
-</div>
 </div>
 """, unsafe_allow_html=True)
     

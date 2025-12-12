@@ -368,23 +368,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =============================================================================
-# UNIFIED NAVIGATION (Vibrant Pills)
+# UNIFIED NAVIGATION (Vibrant Pills & SEO Routing)
 # =============================================================================
-
-# =============================================================================
-# UNIFIED NAVIGATION (Controllable State)
-# =============================================================================
+from utils.seo_manager import setup_seo_routing, update_url, inject_seo_meta
 
 # Define Navigation Options (Text Only, Icons handled by option_menu)
 nav_options = ["Home", "Curriculum", "Developers", "Lab", "Reference", "Dashboard"]
 icons = ["house-fill", "journal-code", "code-slash", "cpu-fill", "archive-fill", "grid-1x2-fill"]
 
-# Navigation State Management
-if 'nav_selection' not in st.session_state:
-    st.session_state.nav_selection = nav_options[0]
+# Initialize SEO-friendly Routing
+# This reads ?nav=XXX from URL and sets the state
+current_nav = setup_seo_routing(nav_options, nav_options[0])
 
 def navigate_to(page_name):
     st.session_state.nav_selection = page_name
+    update_url(page_name) # Sync URL on click
 
 # Render Option Menu
 selected_nav = option_menu(
@@ -430,6 +428,11 @@ nexus_tutor.show()
 
 # --- HOME TAB ---
 if st.session_state.nav_selection == "Home":
+    inject_seo_meta(
+        title="Veda AI - The Ultimate AI Learning Hub",
+        description="Master Artificial Intelligence, Deep Learning, and Agentic AI with our free, open-source curriculum.",
+        keywords=["AI Course", "Deep Learning Tutorial", "Free AI Education", "Veda AI"]
+    )
     st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown("---")
@@ -521,6 +524,11 @@ if st.session_state.nav_selection == "Home":
 
 # --- TAB 2: CURRICULUM ---
 if st.session_state.nav_selection == "Curriculum":
+    inject_seo_meta(
+        title="AI Curriculum - Deep Learning & ML Mastery",
+        description="Comprehensive modules covering Neural Networks, NLP, Computer Vision, and Generative AI.",
+        keywords=["AI Curriculum", "Machine Learning Syllabus", "Deep Learning Modules"]
+    )
     # Nested Tabs for Modules
     mod_tabs = st.tabs([
         "Fundamentals", "Data", "Supervised", "Unsupervised", "Neural Nets", 
@@ -544,6 +552,11 @@ if st.session_state.nav_selection == "Curriculum":
 
 # --- TAB 3: DEVELOPER TRACK ---
 if st.session_state.nav_selection == "Developers":
+    inject_seo_meta(
+        title="AI Developer Track - Build Agents & RAG",
+        description="Advanced tutorials for building RAG systems, AI Agents, and scalable LLM applications.",
+        keywords=["AI Agents", "RAG Tutorial", "LangChain Guide", "AI Engineering"]
+    )
     st.markdown("""
     ### 💻 Developer & Tester Track
     Build production-grade AI applications. From API calls to Agentic systems.
@@ -577,6 +590,11 @@ if st.session_state.nav_selection == "Developers":
 
 # --- TAB 4: LAB ---
 if st.session_state.nav_selection == "Lab":
+    inject_seo_meta(
+        title="Neural AI Lab - Interactive Experiments",
+        description="Experiment with 3D Neural Networks, LLM Prompt Engineering, and Model Arenas.",
+        keywords=["AI Lab", "Neural Network Visualizer", "Prompt Engineering Tool"]
+    )
     lab_tabs = st.tabs(["⚔️ Arena", "🧊 3D Net", "🧪 Prompt Lab", "Playground", "Quiz", "Upload", "Projects"])
     with lab_tabs[0]: model_arena.show()
     with lab_tabs[1]: neural_viz_3d.show()
@@ -589,6 +607,11 @@ if st.session_state.nav_selection == "Lab":
 
 # --- TAB 5: REFERENCE ---
 if st.session_state.nav_selection == "Reference":
+    inject_seo_meta(
+        title="AI Reference Library - Cheat Sheets & Papers",
+        description="Curated collection of AI research papers, cheat sheets, and video tutorials.",
+        keywords=["AI Cheat Sheet", "ML Papers", "AI Resources"]
+    )
     ref_tabs = st.tabs(["CheatSheet", "Videos", "Interviews", "Papers", "MLOps"])
     with ref_tabs[0]: cheatsheet.show()
     with ref_tabs[1]: video_tutorials.show()

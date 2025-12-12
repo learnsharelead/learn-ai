@@ -143,8 +143,8 @@ def show():
             
         with col2:
             st.subheader("What are AI Agents?")
-            st.video("https://www.youtube.com/watch?v=F8NxhbiCf0M")
-            st.caption("IBM Technology - AI Agents Explained Clearly")
+            st.video("https://www.youtube.com/watch?v=QAwV2V91y2U") 
+            st.caption("Simplilearn - AI Agents Explained")
             
         st.markdown("---")
         
@@ -167,14 +167,14 @@ def show():
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("RAG Evaluation (Ragas)")
-            st.video("https://www.youtube.com/watch?v=LnCP2uB56UI")
-            st.caption("Sam Witteveen - Deep dive into RAG Evaluation")
+            st.subheader("RAG Explained (Edureka)")
+            st.video("https://www.youtube.com/watch?v=mnJO57Xg7gw")
+            st.caption("Edureka - RAG Tutorial")
             
         with col2:
-            st.subheader("Red Teaming LLMs")
-            st.video("https://www.youtube.com/watch?v=ThpSJDkSgxc")
-            st.caption("IBM Technology - What is Red Teaming?")
+            st.subheader("Red Teaming (Google)")
+            st.video("https://www.youtube.com/watch?v=l_6j_8_0-w4") # Google SAIF
+            st.caption("Google - Secure AI Framework")
             
         st.markdown("---")
         

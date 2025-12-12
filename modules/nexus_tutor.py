@@ -19,8 +19,11 @@ def show():
         st.markdown("---")
         st.markdown("### 🤖 Nexus Tutor")
         
-        # Check API configuration
-        gemini_api_key = os.getenv("GEMINI_API_KEY", "")
+        # Check API configuration (Env Var OR Streamlit Secrets)
+        gemini_api_key = os.getenv("GEMINI_API_KEY")
+        if not gemini_api_key and "GEMINI_API_KEY" in st.secrets:
+            gemini_api_key = st.secrets["GEMINI_API_KEY"]
+            
         use_real_ai = GEMINI_AVAILABLE and gemini_api_key
         
         # --- Settings / Model Selector ---
@@ -84,7 +87,8 @@ def show():
                             user_input, 
                             model_choice, 
                             temperature,
-                            st.session_state.chat_history
+                            st.session_state.chat_history,
+                            gemini_api_key
                         )
                     else:
                         time.sleep(0.8)  # Simulate API delay
@@ -103,13 +107,13 @@ def show():
             # 3. Save Assistant Message
             st.session_state.chat_history.append({"role": "assistant", "content": full_response})
 
-def generate_gemini_response(prompt, model_choice, temperature, chat_history):
+def generate_gemini_response(prompt, model_choice, temperature, chat_history, api_key):
     """
     Generate response using Google Gemini API.
     """
     try:
         # Configure Gemini
-        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+        genai.configure(api_key=api_key)
         
         # Select model
         model_name = "gemini-1.5-flash" if "Flash" in model_choice else "gemini-1.5-pro"

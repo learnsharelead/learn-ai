@@ -1,4 +1,10 @@
 import streamlit as st
+from dotenv import load_dotenv
+import os
+
+# Load environment variables (must be before other imports)
+load_dotenv()
+
 import streamlit.components.v1 as components
 import json
 from streamlit_option_menu import option_menu

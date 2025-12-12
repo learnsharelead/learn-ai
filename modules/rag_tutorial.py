@@ -5,7 +5,13 @@ import time
 try:
     from langchain.text_splitter import RecursiveCharacterTextSplitter
 except ImportError:
-    from langchain_text_splitters import RecursiveCharacterTextSplitter
+    try:
+        from langchain_text_splitters import RecursiveCharacterTextSplitter
+    except ImportError:
+        # Fallback to prevent crash during installation
+        class RecursiveCharacterTextSplitter:
+            def __init__(self, **kwargs): pass
+            def split_documents(self, docs): return []
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 
 def show():

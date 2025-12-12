@@ -22,11 +22,31 @@ from modules import (
 # PAGE CONFIGURATION
 # =============================================================================
 st.set_page_config(
-    page_title="AI Masterclass",
+    page_title="AI Nexus Academy",
     page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# =============================================================================
+# GOOGLE ANALYTICS 4 TRACKING
+# =============================================================================
+import os
+
+GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
+
+if GA_MEASUREMENT_ID:
+    ga_code = f"""
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{GA_MEASUREMENT_ID}');
+    </script>
+    """
+    components.html(ga_code, height=0)
 
 # =============================================================================
 # ENTERPRISE-GRADE CSS SYSTEM

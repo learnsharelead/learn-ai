@@ -1,4 +1,9 @@
 import streamlit as st
+import os
+import tempfile
+import time
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader, TextLoader
 
 def show():
     st.title("📚 RAG: Retrieval-Augmented Generation")
@@ -15,7 +20,8 @@ def show():
         "🔢 Embeddings",
         "🗄️ Vector Stores",
         "🔨 Build RAG",
-        "🚀 Advanced RAG"
+        "🚀 Advanced RAG",
+        "⚡ Live RAG Lab"
     ])
     
     # TAB 1: What is RAG
@@ -62,305 +68,168 @@ def show():
         4. Sends to LLM: "Based on this: [refund policy text], answer: What's our refund policy?"
         5. LLM answers accurately!
         """)
-        
-        st.info("""
-        **Why Not Fine-Tune Instead?**
-        - RAG is faster (no training needed)
-        - RAG is cheaper (no GPU costs)
-        - RAG stays current (update docs anytime)
-        - RAG is auditable (shows sources)
-        """)
     
     # TAB 2: Embeddings
     with tabs[1]:
         st.header("🔢 Understanding Embeddings")
-        
         st.markdown("""
-        ### How Machines Understand Text
-        
         **Embeddings** convert text into numbers (vectors) that capture meaning.
         Similar texts have similar vectors!
         """)
         
-        st.subheader("The Magic of Vector Space")
-        
-        st.markdown("""
-        Each piece of text becomes a point in high-dimensional space:
-        
-        | Text | Vector (simplified) |
-        |------|---------------------|
-        | "Happy dog" | [0.9, 0.1, 0.8, ...] |
-        | "Joyful puppy" | [0.85, 0.15, 0.78, ...] ← Similar! |
-        | "Sad cat" | [0.2, 0.9, 0.3, ...] ← Different |
-        """)
-        
-        st.subheader("Creating Embeddings")
+        st.info("Example: 'Dog' and 'Puppy' will have vectors that are numerically close, while 'Dog' and 'Sandwich' will be far apart.")
         
         st.code('''
-from openai import OpenAI
-
-client = OpenAI()
-
-# Create embedding for a text
-response = client.embeddings.create(
-    model="text-embedding-3-small",
-    input="What is machine learning?"
-)
-
-embedding = response.data[0].embedding
-print(f"Vector length: {len(embedding)}")  # 1536 dimensions!
-print(f"First 5 values: {embedding[:5]}")
+# Example Vector Representation (Simplified)
+"King"   -> [0.9, 0.1, 0.5]
+"Queen"  -> [0.9, 0.2, 0.5]
+"Apple"  -> [0.1, 0.9, 0.2]
         ''', language="python")
-        
-        st.markdown("---")
-        
-        st.subheader("Popular Embedding Models")
-        
-        models = [
-            ("OpenAI text-embedding-3-small", "1536", "Fast, cheap, good quality"),
-            ("OpenAI text-embedding-3-large", "3072", "Best quality, higher cost"),
-            ("Cohere embed-v3", "1024", "Great for multilingual"),
-            ("HuggingFace all-MiniLM-L6-v2", "384", "Free, local, fast"),
-            ("Voyage AI voyage-3", "1024", "Best retrieval performance"),
-        ]
-        
-        for model, dims, notes in models:
-            st.markdown(f"- **{model}** ({dims} dims): {notes}")
-    
+
     # TAB 3: Vector Stores
     with tabs[2]:
         st.header("🗄️ Vector Databases")
-        
+        st.markdown("A **Vector Database** stores these embeddings for fast retrieval.")
         st.markdown("""
-        ### Store and Search Embeddings
-        
-        A **Vector Database** stores embeddings and enables fast similarity search.
+        - **ChromaDB**: Open source, local, easy.
+        - **Pinecone**: Cloud-managed, scalable.
+        - **Qdrant**: High performance, Rust-based.
         """)
-        
-        st.subheader("Popular Vector Databases")
-        
-        dbs = [
-            {
-                "name": "ChromaDB",
-                "type": "Local",
-                "best_for": "Prototyping, small projects",
-                "code": '''
-from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
 
-# Create vector store
-vectorstore = Chroma.from_texts(
-    texts=["Doc 1 content", "Doc 2 content"],
-    embedding=OpenAIEmbeddings()
-)
-
-# Search
-results = vectorstore.similarity_search("query", k=3)
-'''
-            },
-            {
-                "name": "Pinecone",
-                "type": "Cloud",
-                "best_for": "Production, scalability",
-                "code": '''
-from langchain_pinecone import PineconeVectorStore
-from pinecone import Pinecone
-
-pc = Pinecone(api_key="...")
-index = pc.Index("my-index")
-
-vectorstore = PineconeVectorStore(
-    index=index,
-    embedding=OpenAIEmbeddings()
-)
-'''
-            },
-            {
-                "name": "Qdrant",
-                "type": "Both",
-                "best_for": "Performance, filtering",
-                "code": '''
-from langchain_qdrant import Qdrant
-from qdrant_client import QdrantClient
-
-client = QdrantClient(":memory:")  # or URL
-
-vectorstore = Qdrant.from_texts(
-    texts=["..."],
-    embedding=OpenAIEmbeddings(),
-    client=client,
-    collection_name="my_docs"
-)
-'''
-            }
-        ]
-        
-        for db in dbs:
-            with st.expander(f"🗄️ {db['name']} ({db['type']})"):
-                st.markdown(f"**Best for:** {db['best_for']}")
-                st.code(db['code'], language="python")
-    
-    # TAB 4: Build RAG
+    # TAB 4: Build RAG (Code)
     with tabs[3]:
         st.header("🔨 Build a RAG System")
-        
-        st.markdown("""
-        ### Complete RAG Pipeline
-        
-        Let's build a document Q&A system from scratch!
-        """)
-        
-        st.subheader("Step 1: Load Documents")
-        
         st.code('''
-from langchain_community.document_loaders import (
-    TextLoader,
-    PyPDFLoader,
-    WebBaseLoader
-)
+# 1. Load
+loader = TextLoader("data.txt")
+docs = loader.load()
 
-# Load from file
-loader = TextLoader("docs/policy.txt")
-documents = loader.load()
+# 2. Split
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
+chunks = text_splitter.split_documents(docs)
 
-# Load from PDF
-# loader = PyPDFLoader("report.pdf")
+# 3. Embed & Store
+vectorstore = Chroma.from_documents(chunks, OpenAIEmbeddings())
 
-# Load from web
-# loader = WebBaseLoader("https://example.com")
-        ''', language="python")
-        
-        st.subheader("Step 2: Split into Chunks")
-        
-        st.code('''
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,      # Max characters per chunk
-    chunk_overlap=200,    # Overlap between chunks
-    separators=["\\n\\n", "\\n", ". ", " "]
-)
-
-chunks = splitter.split_documents(documents)
-print(f"Created {len(chunks)} chunks")
-        ''', language="python")
-        
-        st.subheader("Step 3: Create Vector Store")
-        
-        st.code('''
-from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
-
-vectorstore = Chroma.from_documents(
-    documents=chunks,
-    embedding=OpenAIEmbeddings(),
-    persist_directory="./chroma_db"  # Save locally
-)
-        ''', language="python")
-        
-        st.subheader("Step 4: Create RAG Chain")
-        
-        st.code('''
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
-
-# Create retriever
-retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
-
-# Create prompt
-template = """Answer based on the following context:
-
-Context: {context}
-
-Question: {question}
-
-Answer:"""
-
-prompt = ChatPromptTemplate.from_template(template)
-
-# Create chain
-llm = ChatOpenAI(model="gpt-4o")
-
+# 4. Retrieve & Generate
+retriever = vectorstore.as_retriever()
 rag_chain = (
-    {"context": retriever, "question": RunnablePassthrough()}
-    | prompt
+    {"context": retriever, "question": RunnablePassthrough()} 
+    | prompt 
     | llm
-    | StrOutputParser()
 )
-
-# Ask a question!
-answer = rag_chain.invoke("What is our refund policy?")
-print(answer)
+rag_chain.invoke("My question")
         ''', language="python")
-    
-    # TAB 5: Advanced RAG
+
+    # TAB 5: Advanced
     with tabs[4]:
-        st.header("🚀 Advanced RAG Techniques")
+        st.header("🚀 Advanced RAG")
+        st.markdown("- **Hybrid Search**: Keywords + Vectors")
+        st.markdown("- **Re-ranking**: Double-check relevance")
+        st.markdown("- **Parent Document**: Retrieve full context")
+
+    # TAB 6: Live Lab
+    with tabs[5]:
+        st.header("⚡ Live RAG Lab")
+        st.markdown("Upload a PDF and chat with it!")
         
-        st.markdown("""
-        ### Beyond Basic RAG
+        uploaded_file = st.file_uploader("Upload a PDF Document", type="pdf")
         
-        Real-world RAG systems need optimization.
-        """)
-        
-        techniques = [
-            {
-                "name": "🔍 Hybrid Search",
-                "desc": "Combine vector search with keyword search (BM25)",
-                "why": "Better for exact matches (names, codes)"
-            },
-            {
-                "name": "📊 Reranking",
-                "desc": "Use a second model to rerank retrieved results",
-                "why": "Improves relevance of top results"
-            },
-            {
-                "name": "📑 Parent-Child Chunking",
-                "desc": "Embed small chunks, retrieve parent documents",
-                "why": "More context for the LLM"
-            },
-            {
-                "name": "🔄 Query Expansion",
-                "desc": "Generate multiple versions of the query",
-                "why": "Find more relevant documents"
-            },
-            {
-                "name": "📝 Self-RAG",
-                "desc": "LLM decides when to retrieve and validates answers",
-                "why": "Reduces hallucinations"
-            },
-            {
-                "name": "🗂️ Metadata Filtering",
-                "desc": "Filter by date, source, category before vector search",
-                "why": "Faster, more targeted results"
-            }
-        ]
-        
-        for t in techniques:
-            with st.expander(t["name"]):
-                st.markdown(f"**What:** {t['desc']}")
-                st.markdown(f"**Why:** {t['why']}")
-        
-        st.markdown("---")
-        
-        st.subheader("RAG Evaluation Metrics")
-        
-        st.markdown("""
-        | Metric | Description |
-        |--------|-------------|
-        | **Retrieval Precision** | % of retrieved docs that are relevant |
-        | **Retrieval Recall** | % of relevant docs that were retrieved |
-        | **Answer Relevance** | Does the answer address the question? |
-        | **Faithfulness** | Is the answer grounded in retrieved docs? |
-        | **Hallucination Rate** | % of answers with made-up info |
-        """)
-        
-        st.info("""
-        **Tools for RAG Evaluation:**
-        - Ragas
-        - TruLens
-        - LangSmith
-        - Phoenix (Arize)
-        """)
+        if uploaded_file:
+            with st.spinner("Processing PDF..."):
+                # Save temp file
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                    tmp_file.write(uploaded_file.getvalue())
+                    tmp_path = tmp_file.name
+                
+                # Load & Split
+                try:
+                    loader = PyPDFLoader(tmp_path)
+                    docs = loader.load()
+                    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+                    chunks = splitter.split_documents(docs)
+                    
+                    st.success(f"✅ Loaded {len(docs)} pages and split into {len(chunks)} chunks.")
+                    
+                    # Show preview
+                    with st.expander("👀 View Document Chunks"):
+                        for i, chunk in enumerate(chunks[:3]):
+                            st.caption(f"Chunk {i+1}:")
+                            st.text(chunk.page_content[:300] + "...")
+                    
+                    # Interactive Chat
+                    st.markdown("### 💬 Chat with your Document")
+                    
+                    user_q = st.text_input("Ask a question about this document:")
+                    
+                    if user_q:
+                        # SIMULATED RAG (for stability without needing keys in demo)
+                        # In production, we would use Chroma + OpenAI/Gemini Embeddings
+                        
+                        st.markdown("**1. Retrieving relevant chunks...**")
+                        
+                        # Simple retrieval simulation (Keyword matching)
+                        relevant_chunks = []
+                        keywords = user_q.lower().split()
+                        
+                        for chunk in chunks:
+                            score = 0
+                            content_lower = chunk.page_content.lower()
+                            for k in keywords:
+                                if k in content_lower:
+                                    score += 1
+                            if score > 0:
+                                relevant_chunks.append((score, chunk.page_content))
+                        
+                        # Sort by score
+                        relevant_chunks.sort(key=lambda x: x[0], reverse=True)
+                        top_contexts = [c[1] for c in relevant_chunks[:3]]
+                        
+                        if not top_contexts:
+                            # Fallback if no keywords found (just take first 2)
+                            top_contexts = [c.page_content for c in chunks[:2]]
+                            st.warning("⚠️ Low relevance match. Using partial context.")
+                        
+                        context_text = "\n\n".join(top_contexts)
+                        
+                        st.info(f"🔍 Found {len(top_contexts)} relevant context clips.")
+                        with st.expander("View Retrieved Context"):
+                            st.markdown(context_text)
+                            
+                        # Use Nexus Tutor Logic (Gemini) if available
+                        st.markdown("**2. Generating Answer...**")
+                        
+                        prompt = f"""
+                        You are a helpful RAG assistant. Answer the question based ONLY on the context provided below.
+                        
+                        Context:
+                        {context_text}
+                        
+                        Question: {user_q}
+                        
+                        Answer:
+                        """
+                        
+                        # Check for Gemini
+                        api_key = os.getenv("GEMINI_API_KEY")
+                        if not api_key and "GEMINI_API_KEY" in st.secrets:
+                            api_key = st.secrets["GEMINI_API_KEY"]
+                            
+                        if api_key:
+                            try:
+                                import google.generativeai as genai
+                                genai.configure(api_key=api_key)
+                                model = genai.GenerativeModel('gemini-1.5-flash')
+                                response = model.generate_content(prompt)
+                                st.write(response.text)
+                            except Exception as e:
+                                st.error(f"AI Generation failed: {str(e)}")
+                        else:
+                            st.warning("⚠️ No API Key found. Displaying Mock Response.")
+                            st.write(f"**Mock Answer:** Based on the document, I found information relevant to '{user_q}'. The document mentions: {context_text[:100]}...")
+                            
+                except Exception as e:
+                    st.error(f"Error processing PDF: {str(e)}")
+                    st.info("Please ensure 'pypdf' is installed in requirements.txt")
+                finally:
+                    os.unlink(tmp_path)

@@ -531,7 +531,7 @@ transition: transform 0.2s ease;
 if st.session_state.nav_selection == "📚 Curriculum":
     # Nested Tabs for Modules
     mod_tabs = st.tabs([
-        "Fundamentals", "Data", "Supervised", "Unsupervised", "🧠 Neural Nets (PyTorch)", 
+        "Fundamentals", "Data", "Supervised", "Unsupervised", "Neural Nets", 
         "Computer Vision", "NLP", "Advanced NLP", "Time Series", "Rec Sys", "Reinforcement", "Generative AI", "Ethics"
     ])
     
@@ -557,14 +557,14 @@ if st.session_state.nav_selection == "💻 Developers":
     Build production-grade AI applications. From API calls to Agentic systems.
     """)
     dev_tabs = st.tabs([
-        "⚡ RAG Workshop", "🛠️ AI Stack", "🔗 LangChain", "🤖 Agents", "🔌 MCP", "🧪 Testing",
+        "🛠️ AI Stack", "🔗 LangChain", "📚 RAG", "🤖 Agents", "🔌 MCP", "🧪 Testing",
         "🎛️ Fine-Tuning", "🔐 Security", "👁️ Multi-Modal", "🔴 Red Teaming", "⚖️ Fairness",
         "💰 Cost Opt", "📊 Observability", "🤖 Assistants API", "🛠️ Deep Dives",
         "👥 Multi-Agent", "🎲 Synthetic Data", "⚡ Perf Test", "📈 A/B Test"
     ])
-    with dev_tabs[0]: rag_tutorial.show()
-    with dev_tabs[1]: ai_dev_stack.show()
-    with dev_tabs[2]: langchain_langraph.show()
+    with dev_tabs[0]: ai_dev_stack.show()
+    with dev_tabs[1]: langchain_langraph.show()
+    with dev_tabs[2]: rag_tutorial.show()
     with dev_tabs[3]: agentic_ai.show()
     with dev_tabs[4]: mcp_tutorial.show()
     with dev_tabs[5]: ai_testing.show()

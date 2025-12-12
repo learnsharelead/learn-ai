@@ -137,45 +137,44 @@ def show():
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("LangChain Crash Course")
-            st.video("https://www.youtube.com/watch?v=aywZRZNAudl")
-            st.caption("Rabbitmetrics - LangChain for Beginners")
+            st.subheader("LangChain Course (FreeCodeCamp)")
+            st.video("https://www.youtube.com/watch?v=dyGTdb7qYKQ") 
+            st.caption("FreeCodeCamp - Full LangChain & Vector DB Course")
             
         with col2:
-            st.subheader("Building AI Agents")
-            st.video("https://www.youtube.com/watch?v=qBurTtE4qGw")
-            st.caption("Dave Ebbelaar - OpenAI Assistants API")
+            st.subheader("What are AI Agents?")
+            st.video("https://www.youtube.com/watch?v=F8NxhbiCf0M")
+            st.caption("IBM Technology - AI Agents Explained Clearly")
             
         st.markdown("---")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("Vector Databases (Pinecone)")
-            st.video("https://www.youtube.com/watch?v=LcBbaS1Q1Ro")
-            st.caption("James Briggs - Vector DBs explained")
+            st.subheader("Vector Databases (Fireship)")
+            st.video("https://www.youtube.com/watch?v=klTvEwg3oJk")
+            st.caption("Fireship - Vector DBs in 100 Seconds")
             
         with col2:
-            st.subheader("Building Full Stack AI Apps")
-            st.video("https://www.youtube.com/watch?v=cMux1fJ4Wwc")
-            st.caption("Code With Antonio - Next.js + AI Saas")
+            st.subheader("Build a RAG Chatbot")
+            st.video("https://www.youtube.com/watch?v=Lcn9Ngj0QNA")
+            st.caption("Alejandro AO - RAG Chatbot from Scratch")
 
     # Testers Track
     with tabs[5]:
         st.header("🧪 AI Testing, QA & Evaluation")
-        st.info("Testing AI is different from traditional software. It's probabilistic, not deterministic.")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("Evaluating LLMs (Ragas)")
-            st.video("https://www.youtube.com/watch?v=AnrPkl35hLI")
-            st.caption("LangChain - Evaluating RAG Pipelines")
+            st.subheader("RAG Evaluation (Ragas)")
+            st.video("https://www.youtube.com/watch?v=LnCP2uB56UI")
+            st.caption("Sam Witteveen - Deep dive into RAG Evaluation")
             
         with col2:
             st.subheader("Red Teaming LLMs")
-            st.video("https://www.youtube.com/watch?v=biYMlbzR2Vs")
-            st.caption("Microsoft Actionable AI - Red Teaming Basics")
+            st.video("https://www.youtube.com/watch?v=ThpSJDkSgxc")
+            st.caption("IBM Technology - What is Red Teaming?")
             
         st.markdown("---")
         
@@ -187,9 +186,9 @@ def show():
             st.caption("Computerphile - Prompt Injection Explained")
             
         with col2:
-            st.subheader("Testing AI Bias & Fairness")
-            st.video("https://www.youtube.com/watch?v=Ug_D8PFDEus")
-            st.caption("Google - Fairness in ML")
+            st.subheader("AI Bias & Fairness")
+            st.video("https://www.youtube.com/watch?v=5xvNIPc24jo")
+            st.caption("Google Cloud Tech - AI Fairness Explained")
     
     # Career
     with tabs[6]:

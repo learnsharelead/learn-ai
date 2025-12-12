@@ -27,8 +27,7 @@ from modules import (
 # =============================================================================
 # PAGE CONFIGURATION
 # =============================================================================
-st.set_page_config(
-    page_title="Veda AI",
+    page_title="Synapse AI",
     page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -344,15 +343,28 @@ st.markdown("""
 # =============================================================================
 # HEADER (New Brand Identity)
 # =============================================================================
-c_head1, c_head2 = st.columns([0.1, 0.9])
-with c_head1:
-    st.markdown("<div style='font-size:42px; padding-top:5px; text-align:right;'>🧬</div>", unsafe_allow_html=True)
-with c_head2:
-    st.markdown("""
-    <h1 style='margin: 0; padding-top: 0px; font-size: 42px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.2; color: #111827;'>
+st.markdown("""
+<div style="
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 15px; 
+    padding-bottom: 15px;
+">
+    <div style="font-size: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">🧬</div>
+    <h1 style='
+        margin: 0; 
+        padding: 0; 
+        font-size: 38px; 
+        font-weight: 800; 
+        letter-spacing: -1px; 
+        color: #111827;
+        line-height: 1;
+    '>
         Veda <span style='background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>AI</span>
     </h1>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
 # =============================================================================
 # UNIFIED NAVIGATION (Vibrant Pills)

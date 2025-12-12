@@ -1,5 +1,8 @@
 import streamlit as st
+import streamlit.components.v1 as components
+import json
 from streamlit_option_menu import option_menu
+from utils.news_fetcher import fetch_ai_news
 from modules import (
     introduction, data_preprocessing, supervised_learning, unsupervised_learning, 
     neural_networks, nlp_basics, computer_vision, projects, generative_ai,
@@ -253,267 +256,145 @@ with c_head2:
 # UNIFIED NAVIGATION (Vibrant Pills)
 # =============================================================================
 
-# Top-level Tabs
-main_tabs = st.tabs(["🏠 Home", "📚 Curriculum", "💻 Developers", "🛠️ Lab", "📑 Reference", "📊 Dashboard"])
+# =============================================================================
+# UNIFIED NAVIGATION (Controllable State)
+# =============================================================================
+
+# Define Navigation Options
+nav_options = ["🏠 Home", "📚 Curriculum", "💻 Developers", "🛠️ Lab", "📑 Reference", "📊 Dashboard"]
+icons = ["house", "book", "laptop", "tools", "file-text", "bar-chart"]
+
+# Navigation State Management
+if 'nav_selection' not in st.session_state:
+    st.session_state.nav_selection = nav_options[0]
+
+def navigate_to(page_name):
+    st.session_state.nav_selection = page_name
+
+# Render Option Menu
+selected_nav = option_menu(
+    menu_title=None,
+    options=nav_options,
+    icons=icons,
+    default_index=nav_options.index(st.session_state.nav_selection),
+    orientation="horizontal",
+    styles={
+        "container": {"padding": "0!important", "background-color": "transparent"},
+        "icon": {"color": "#6e6e73", "font-size": "14px"}, 
+        "nav-link": {"font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "#eee"},
+        "nav-link-selected": {"background-color": "#3b82f6", "font-weight": "600"},
+    },
+    key='navigation_menu',
+    on_change=lambda key: navigate_to(st.session_state[key]) # Sync state
+)
+
+
 
 # --- SIDEBAR TUTOR ---
 nexus_tutor.show()
 
-# --- TAB 1: HOME (Rebranded & Sales Focused) ---
-with main_tabs[0]:
-    # --- HERO SECTION (Centered & Unified) ---
+# --- HOME TAB ---
+if st.session_state.nav_selection == "🏠 Home":
+    # --- HERO SECTION ---
     st.markdown("""
-    <style>
-        .hero-container {
-            text-align: center;
-            padding: 3rem 0 2rem 0;
-            margin: 0 auto;
-            max-width: 900px;
-        }
-        .hero-text {
-            background: linear-gradient(90deg, #1d1d1f 0%, #2563eb 50%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3.8rem !important;
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 0.8rem;
-            white-space: nowrap; /* Force single line */
-        }
-        .sub-hero {
-            font-size: 1.4rem !important;
-            color: #6e6e73;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-        }
-    </style>
-    <div class="hero-container">
-        <div class="hero-text">Build the Brain. Design the Future.</div>
-        <div class="sub-hero">Zero Paywalls. 100% Open Source. The New Standard for AI Mastery.</div>
+    <div style="text-align: center; padding: 2rem 0 1.5rem 0; animation: fadein 1s;">
+        <h1 style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #1d1d1f 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; letter-spacing: -2px;">
+            The AI Nexus
+        </h1>
+        <p style="font-size: 1.1rem; color: #4b5563; max-width: 600px; margin: 0 auto; line-height: 1.5;">
+            Command center for Artificial Intelligence. <span style="color: #6366f1; font-weight: 600;">Track real-time</span> & <span style="color: #6366f1; font-weight: 600;">Build</span>.
+        </p>
     </div>
     """, unsafe_allow_html=True)
-    
-    # Centered CTA
-    _, c_cta, _ = st.columns([1, 1, 1])
-    with c_cta:
-        # Link to Dashboard or Curriculum
-        st.button("🚀 Start Your Journey", key="hero_cta_main", use_container_width=True)
     
     st.markdown("---")
-    
-    # --- VIBRANT STYLING (Home Page Exclusive & Mobile Responsive) ---
-    st.markdown("""
-    <style>
-        /* Desktop First Styles */
-        .vibrant-card {
-            padding: 1.5rem;
-            border-radius: 20px;
-            color: white;
-            height: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            margin-bottom: 1rem; /* Spacing for mobile stack */
-        }
-        .vibrant-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        .card-blue { background: linear-gradient(135deg, #2563eb 0%, #00C6FF 100%); }
-        .card-purple { background: linear-gradient(135deg, #7c3aed 0%, #f43f5e 100%); }
-        .card-orange { background: linear-gradient(135deg, #f59e0b 0%, #ff6b6b 100%); }
-        .card-green { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); }
-        
-        .bento-icon-lg { font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.9; }
-        .bento-title-lg { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.2rem; }
-        .bento-desc-lg { font-size: 0.9rem; opacity: 0.9; font-weight: 500; }
-        
-        /* News Cards */
-        .news-card-pro {
-            background: white;
-            border-radius: 16px;
-            padding: 0;
-            height: 100%;
-            min-height: 200px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-            border: 1px solid rgba(0,0,0,0.03);
-            overflow: hidden;
-            margin-bottom: 1rem; /* Spacing for mobile stack */
-        }
-        .news-card-pro:hover { transform: translateY(-3px); }
-        .news-header {
-            padding: 12px 16px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: white;
-        }
-        .news-body { padding: 16px; }
-        .news-date { color: #888; font-size: 11px; margin-bottom: 8px; display: block; }
-
-        /* --- MOBILE REFINEMENTS (Max Width 768px) --- */
-        @media only screen and (max-width: 768px) {
-            /* Hero adjustments */
-            .hero-text {
-                font-size: 2.2rem !important; /* Smaller headline */
-                white-space: normal !important; /* Allow wrapping */
-                line-height: 1.2 !important;
-            }
-            .sub-hero {
-                font-size: 1.1rem !important;
-                padding: 0 1rem; /* Add breathing room */
-            }
-            .hero-container {
-                padding: 1rem 0 1rem 0;
-            }
-            
-            /* Card compacting */
-            .vibrant-card {
-                padding: 1.2rem;
-                min-height: auto;
-            }
-            .bento-icon-lg { font-size: 2.5rem; }
-            
-            /* General container padding reduction */
-            .block-container {
-                padding-top: 2rem !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-            
-            /* Hide non-essential elements if needed */
-            .bento-desc-lg {
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # --- FEATURE BENTO GRID (Vibrant) ---
-    st.markdown("<h3 style='margin-bottom:1.5rem; font-weight:700;'>🚀 The Nexus Toolkit</h3>", unsafe_allow_html=True)
-    cols = st.columns(4)
-    
-    with cols[0]:
-        st.markdown("""
-        <div class="vibrant-card card-blue">
-            <div class="bento-icon-lg">🦾</div>
-            <div class="bento-title-lg">Core AI</div>
-            <div class="bento-desc-lg">Math, Logic & Python.</div>
-        </div>""", unsafe_allow_html=True)
-        
-    with cols[1]:
-        st.markdown("""
-        <div class="vibrant-card card-purple">
-            <div class="bento-icon-lg">🧠</div>
-            <div class="bento-title-lg">Deep Learning</div>
-            <div class="bento-desc-lg">CNNs & Transformers.</div>
-        </div>""", unsafe_allow_html=True)
-        
-    with cols[2]:
-        st.markdown("""
-        <div class="vibrant-card card-orange">
-            <div class="bento-icon-lg">🎨</div>
-            <div class="bento-title-lg">Generative</div>
-            <div class="bento-desc-lg">Prompts & Diffusion.</div>
-        </div>""", unsafe_allow_html=True)
-        
-    with cols[3]:
-        st.markdown("""
-        <div class="vibrant-card card-green">
-            <div class="bento-icon-lg">⚡</div>
-            <div class="bento-title-lg">Ops & Scale</div>
-            <div class="bento-desc-lg">Deploy & Ethics.</div>
-        </div>""", unsafe_allow_html=True)
-    
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- LATEST NEWS SECTION (Pro Cards) ---
-    st.markdown("<h3 style='margin-bottom:1.5rem; font-weight:700;'>📰 Live Intelligence Feed</h3>", unsafe_allow_html=True)
+    # 1. SYSTEM CAPABILITIES (ULTRA-COMPACT BENTO ROW)
+    st.markdown("### 🌌 The Neural Grid")
     
-    news_items = [
-        {
-            "title": "Gemini 2.0: Multimodal King?",
-            "date": "DEC 10 • MODELS",
-            "grad": "linear-gradient(90deg, #4f46e5, #00C6FF)",
-            "text": "Google's new model crushes benchmarks. Is this the end of the text-only era?"
-        },
-        {
-            "title": "NVIDIA B200 Chips Arrive",
-            "date": "DEC 08 • HARDWARE",
-            "grad": "linear-gradient(90deg, #f59e0b, #ff6b6b)",
-            "text": "The 30x speed boost is real. Data centers are racing to upgrade for Trillion-param models."
-        },
-        {
-            "title": "New Global AI Safety Treaty",
-            "date": "DEC 05 • POLICY",
-            "grad": "linear-gradient(90deg, #10b981, #059669)",
-            "text": "15 Nations sign accord to ban autonomous weapons and limit generative deepfakes."
-        }
+    # Ultra-Compact Layout: 4 Columns in 1 Row
+    modules_map = [
+        {"icon": "🎓", "title": "Academy", "desc": "Theory & Deep Learning", "bg": "#eff6ff", "border": "#bfdbfe", "shadow": "rgba(59, 130, 246, 0.1)", "target": "📚 Curriculum"},
+        {"icon": "💻", "title": "Dev Track", "desc": "RAG, Agents & MCP", "bg": "#f5f3ff", "border": "#ddd6fe", "shadow": "rgba(139, 92, 246, 0.1)", "target": "💻 Developers"},
+        {"icon": "🛠️", "title": "Neural Lab", "desc": "Arena, 3D & Playground", "bg": "#fff7ed", "border": "#fed7aa", "shadow": "rgba(249, 115, 22, 0.1)", "target": "🛠️ Lab"},
+        {"icon": "🧠", "title": "Research", "desc": "Papers & Reference", "bg": "#f0fdf4", "border": "#bbf7d0", "shadow": "rgba(16, 185, 129, 0.1)", "target": "📑 Reference"}
     ]
     
-    n_cols = st.columns(3)
-    for i, news in enumerate(news_items):
-        with n_cols[i]:
+    # 4 Columns
+    cols = st.columns(4, gap="small")
+    
+    for i, mod in enumerate(modules_map):
+        with cols[i]:
+            # Static Card (No cursor pointer)
             st.markdown(f"""
-            <div class="news-card-pro">
-                <div class="news-header" style="background: {news['grad']};">
-                    {news['date']}
-                </div>
-                <div class="news-body">
-                    <h4 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #111;">{news['title']}</h4>
-                    <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0;">{news['text']}</p>
-                </div>
+            <div style="background: {mod['bg']}; border: 1px solid {mod['border']}; padding: 15px; border-radius: 12px; height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 2px 5px {mod['shadow']};">
+                <div style="font-size: 2rem; margin-bottom: 5px;">{mod['icon']}</div>
+                <div style="font-weight: 700; color: #111; font-size: 1rem; margin-bottom: 2px;">{mod['title']}</div>
+                <div style="font-size: 0.8rem; color: #666; line-height: 1.2;">{mod['desc']}</div>
             </div>
             """, unsafe_allow_html=True)
+            st.button(f"Open", key=f"nav_btn_{i}", use_container_width=True, on_click=lambda t=mod['target']: navigate_to(t))
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("---")
+
+    # 2. VISUAL INTELLIGENCE FEED
+    st.markdown("### 📡 Global Intelligence Feed")
+    with st.spinner("Analyzing global signals..."):
+        latest_news = fetch_ai_news(limit=15)
     
-    # --- MISSION & CONTACT SECTION ---
-    c_mission, c_contact = st.columns([2, 1])
+    news_json = json.dumps(latest_news)
     
-    with c_mission:
-        st.markdown("""
-        <div class="content-card">
-            <h3 style="margin-top:0;">🌐 Open Learning Initiative</h3>
-            <p><strong>Education should be free and accessible to all.</strong></p>
-            <p style="font-size:14px; color:#444;">
-                Nexus AI is dedicated to democratizing Artificial Intelligence education. 
-                No paywalls, no hidden fees—just pure, high-quality knowledge for the curious mind.
-                Whether you're a student, researcher, or hobbyist, this platform is your open playground.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    with c_contact:
-        st.markdown("""
-        <div class="content-card" style="background:#1d1d1f !important; color:white !important;">
-            <h3 style="margin-top:0; color:white !important;">📬 Connect</h3>
-            <p style="color:#a1a1a6 !important;">Feedback? Questions? Ideas?</p>
-            <div style="margin-top:15px; font-size:13px; color:#ffffff;">
-                <b>Vikas Singh</b><br>
-                Creator & Educator<br>
-                <br>
-                ✉️ <a href="mailto:vikas.singh.info@gmail.com" style="color:#2997ff; text-decoration:none;">vikas.singh.info@gmail.com</a>
+    # ... (Keep Carousel HTML logic same, omitted for brevity, just ensure it renders) ...
+    # Re-inserting Carousel HTML for completeness since replace overwrites block
+    carousel_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+            body {{ font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; background: transparent; }}
+            .carousel {{ position: relative; width: 100%; height: 380px; perspective: 1000px; }}
+            .carousel-track-container {{ overflow: hidden; width: 100%; height: 100%; padding: 10px 0; }}
+            .carousel-track {{ display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 20px; padding-left: 10px; }}
+            .card {{ flex: 0 0 300px; background: rgba(255, 255, 255, 0.9); border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.6); transition: transform 0.3s ease; height: 340px; display: flex; flex-direction: column; }}
+            .card:hover {{ transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }}
+            .card-image {{ height: 160px; width: 100%; background-size: cover; background-position: center; position: relative; }}
+            .badge {{ position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; backdrop-filter: blur(4px); }}
+            .card-content {{ padding: 16px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }}
+            .date {{ font-size: 11px; color: #888; margin-bottom: 6px; font-weight: 600; }}
+            .title {{ font-size: 16px; font-weight: 700; color: #111; line-height: 1.4; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; display: -webkit-box; }}
+            .read-more {{ margin-top: 12px; font-size: 13px; color: #2563eb; font-weight: 600; }}
+        </style>
+    </head>
+    <body>
+        <div class="carousel" id="carousel">
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="track"></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    
-    # --- FOOTER ---
-    st.markdown("""
-    <div style="text-align: center; margin-top: 3rem; color: #86868b; font-size: 12px;">
-        <hr>
-        &copy; 2025 vikas.singh.info@gmail.com • Made with ❤️ for the AI Community
-    </div>
-    """, unsafe_allow_html=True)
-
+        <script>
+            const newsData = {news_json};
+            const track = document.getElementById('track');
+            newsData.forEach(item => {{
+                const card = document.createElement('a');
+                card.className = 'card'; card.href = item.link; card.target = '_blank';
+                card.innerHTML = `<div class="card-image" style="background-image: url('${{item.image}}');"><div class="badge">${{item.source}}</div></div><div class="card-content"><div><div class="date">${{item.date}}</div><div class="title">${{item.title}}</div></div><div class="read-more">Read Article →</div></div>`;
+                track.appendChild(card);
+            }});
+            let idx = 0; const w = 320;
+            setInterval(() => {{
+                idx++; if (idx > newsData.length - 2) idx = 0;
+                track.style.transform = `translateX(-${{idx * w}}px)`;
+            }}, 4000);
+        </script>
+    </body>
+    </html>
+    """
+    components.html(carousel_html, height=400, scrolling=False)
 
 # --- TAB 2: CURRICULUM ---
-with main_tabs[1]:
+if st.session_state.nav_selection == "📚 Curriculum":
     # Nested Tabs for Modules
     mod_tabs = st.tabs([
         "Fundamentals", "Data", "Supervised", "Unsupervised", "Neural Nets", 
@@ -536,7 +417,7 @@ with main_tabs[1]:
 
 
 # --- TAB 3: DEVELOPER TRACK ---
-with main_tabs[2]:
+if st.session_state.nav_selection == "💻 Developers":
     st.markdown("""
     ### 💻 Developer & Tester Track
     Build production-grade AI applications. From API calls to Agentic systems.
@@ -569,7 +450,7 @@ with main_tabs[2]:
 
 
 # --- TAB 4: LAB ---
-with main_tabs[3]:
+if st.session_state.nav_selection == "🛠️ Lab":
     lab_tabs = st.tabs(["⚔️ Arena", "🧊 3D Net", "🧪 Prompt Lab", "Playground", "Quiz", "Upload", "Projects"])
     with lab_tabs[0]: model_arena.show()
     with lab_tabs[1]: neural_viz_3d.show()
@@ -581,7 +462,7 @@ with main_tabs[3]:
 
 
 # --- TAB 5: REFERENCE ---
-with main_tabs[4]:
+if st.session_state.nav_selection == "📑 Reference":
     ref_tabs = st.tabs(["CheatSheet", "Videos", "Interviews", "Papers", "MLOps"])
     with ref_tabs[0]: cheatsheet.show()
     with ref_tabs[1]: video_tutorials.show()
@@ -590,7 +471,7 @@ with main_tabs[4]:
     with ref_tabs[4]: mlops.show()
 
 # --- TAB 6: DASHBOARD ---
-with main_tabs[5]:
+if st.session_state.nav_selection == "📊 Dashboard":
     progress_dashboard.show()
 
 # =============================================================================

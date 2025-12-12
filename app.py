@@ -341,11 +341,18 @@ st.markdown("""
 # =============================================================================
 # HEADER (New Brand Identity)
 # =============================================================================
-c_head1, c_head2 = st.columns([0.15, 0.85])
+# =============================================================================
+# HEADER (New Brand Identity)
+# =============================================================================
+c_head1, c_head2 = st.columns([0.1, 0.9])
 with c_head1:
-    st.markdown("<div style='font-size:28px; padding-top:2px;'>🧬</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:42px; padding-top:5px; text-align:right;'>🧬</div>", unsafe_allow_html=True)
 with c_head2:
-    st.markdown("<h3 style='margin: 0; padding-top: 5px; font-weight: 800; letter-spacing: -0.5px;'>Veda <span style='color:#3b82f6; font-weight:400;'>AI</span></h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <h1 style='margin: 0; padding-top: 0px; font-size: 42px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.2; color: #111827;'>
+        Veda <span style='background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>AI</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
 # =============================================================================
 # UNIFIED NAVIGATION (Vibrant Pills)
@@ -374,10 +381,30 @@ selected_nav = option_menu(
     default_index=nav_options.index(st.session_state.nav_selection),
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": "transparent"},
-        "icon": {"color": "#6e6e73", "font-size": "14px"}, 
-        "nav-link": {"font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "#3b82f6", "font-weight": "600"},
+        "container": {
+            "padding": "8px", 
+            "background-color": "#ffffff", 
+            "border-radius": "16px",
+            "box-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)",
+            "border": "1px solid rgba(0,0,0,0.05)"
+        },
+        "icon": {"color": "#64748b", "font-size": "18px"}, 
+        "nav-link": {
+            "font-size": "16px", 
+            "text-align": "center", 
+            "margin": "0px 4px", 
+            "--hover-color": "#eff6ff",
+            "border-radius": "10px",
+            "padding": "10px 16px",
+            "font-weight": "500",
+            "color": "#4b5563"
+        },
+        "nav-link-selected": {
+            "background-color": "#2563eb", 
+            "color": "white", 
+            "font-weight": "600",
+            "box-shadow": "0 4px 12px rgba(37, 99, 235, 0.3)"
+        },
     },
     key='navigation_menu',
     on_change=lambda key: navigate_to(st.session_state[key]) # Sync state

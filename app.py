@@ -28,7 +28,7 @@ from modules import (
 # PAGE CONFIGURATION
 # =============================================================================
 st.set_page_config(
-    page_title="Veda AI",
+    page_title="A&A AI",
     page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -362,7 +362,7 @@ st.markdown("""
         color: #111827;
         line-height: 1;
     '>
-        Veda <span style='background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>AI</span>
+        A&A <span style='background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>AI</span>
     </h1>
 </div>
 """, unsafe_allow_html=True)
@@ -429,9 +429,9 @@ nexus_tutor.show()
 # --- HOME TAB ---
 if st.session_state.nav_selection == "Home":
     inject_seo_meta(
-        title="Veda AI - The Ultimate AI Learning Hub",
+        title="A&A AI - The Ultimate AI Learning Hub",
         description="Master Artificial Intelligence, Deep Learning, and Agentic AI with our free, open-source curriculum.",
-        keywords=["AI Course", "Deep Learning Tutorial", "Free AI Education", "Veda AI"]
+        keywords=["AI Course", "Deep Learning Tutorial", "Free AI Education", "A&A AI"]
     )
     st.markdown("<br>", unsafe_allow_html=True)
     

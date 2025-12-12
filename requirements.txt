@@ -58,3 +58,4 @@ pillow
 python-dotenv
 pypdf
 tiktoken
+langchain-text-splitters

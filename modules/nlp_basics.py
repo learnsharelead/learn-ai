@@ -8,15 +8,22 @@ import plotly.express as px
 import numpy as np
 import altair as alt
 
+from utils.audio_manager import listen_section
+
 def show():
     st.title("🗣️ Natural Language Processing (NLP)")
     
-    st.markdown("""
+    # INTRO SECTION
+    intro_content = """
     ### Teaching Machines to Read
     
     **NLP** is how computers understand, interpret, and generate human language.
     From simple word counts to complex Transformer models.
-    """)
+    """
+    
+    # Audio Player for Intro
+    listen_section("NLP Introduction", intro_content.replace("#", "").replace("*", ""))
+    st.markdown(intro_content)
     
     tabs = st.tabs([
         "📜 Text Preprocessing",
@@ -30,7 +37,7 @@ def show():
     with tabs[0]:
         st.header("📜 Step 1: Cleaning Text")
         
-        st.markdown("""
+        preprocess_content = """
         Raw text is messy. Before AI can read it, we must clean it.
         
         **Common Steps:**
@@ -38,7 +45,9 @@ def show():
         2. **Tokenization:** Splitting sentences into words.
         3. **Stop Word Removal:** Removing common words ("the", "is", "at").
         4. **Stemming/Lemmatization:** "Running" -> "Run".
-        """)
+        """
+        listen_section("Preprocessing Guide", preprocess_content.replace("*", ""))
+        st.markdown(preprocess_content)
         
         st.subheader("Interactive Preprocessing")
         

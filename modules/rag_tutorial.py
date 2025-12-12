@@ -12,7 +12,15 @@ except ImportError:
         class RecursiveCharacterTextSplitter:
             def __init__(self, **kwargs): pass
             def split_documents(self, docs): return []
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
+try:
+    from langchain_community.document_loaders import PyPDFLoader, TextLoader
+except ImportError:
+    class PyPDFLoader:
+        def __init__(self, file_path): pass
+        def load(self): return []
+    class TextLoader:
+        def __init__(self, file_path): pass
+        def load(self): return []
 
 def show():
     st.title("📚 RAG: Retrieval-Augmented Generation")

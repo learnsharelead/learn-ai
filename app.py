@@ -609,8 +609,8 @@ if st.session_state.nav_selection == "Lab":
 if st.session_state.nav_selection == "Reference":
     inject_seo_meta(
         title="AI Reference Library - Cheat Sheets & Papers",
-        description="Curated collection of AI research papers, cheat sheets, and video tutorials.",
-        keywords=["AI Cheat Sheet", "ML Papers", "AI Resources"]
+        description="Curated collection of AI research papers, cheat sheets, and video tutorials for Developers (LangChain, RAG) and Testers (Red Teaming, Eval).",
+        keywords=["AI Cheat Sheet", "ML Papers", "AI Resources", "LLM Evaluation", "AI Red Teaming"]
     )
     ref_tabs = st.tabs(["CheatSheet", "Videos", "Interviews", "Papers", "MLOps"])
     with ref_tabs[0]: cheatsheet.show()

@@ -7,8 +7,8 @@ def show():
     Learn from curated video content! Each video is selected to complement the written tutorials.
     """)
     
-    # Video categories
-    tabs = st.tabs(["🎓 Fundamentals", "🔥 Machine Learning", "🧠 Deep Learning", "🤖 Generative AI", "💼 Career"])
+    # Video categories updated with new tracks
+    tabs = st.tabs(["🎓 Fundamentals", "🔥 Machine Learning", "🧠 Deep Learning", "🤖 Generative AI", "💻 Developers", "🧪 Testers", "💼 Career"])
     
     # Fundamentals
     with tabs[0]:
@@ -129,9 +129,70 @@ def show():
             st.subheader("RAG Explained")
             st.video("https://www.youtube.com/watch?v=T-D1OfcDW1M")
             st.caption("IBM - Retrieval Augmented Generation")
+            
+    # Developers Track
+    with tabs[4]:
+        st.header("💻 AI Engineering & Development")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("LangChain Crash Course")
+            st.video("https://www.youtube.com/watch?v=aywZRZNAudl")
+            st.caption("Rabbitmetrics - LangChain for Beginners")
+            
+        with col2:
+            st.subheader("Building AI Agents")
+            st.video("https://www.youtube.com/watch?v=qBurTtE4qGw")
+            st.caption("Dave Ebbelaar - OpenAI Assistants API")
+            
+        st.markdown("---")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("Vector Databases (Pinecone)")
+            st.video("https://www.youtube.com/watch?v=LcBbaS1Q1Ro")
+            st.caption("James Briggs - Vector DBs explained")
+            
+        with col2:
+            st.subheader("Building Full Stack AI Apps")
+            st.video("https://www.youtube.com/watch?v=cMux1fJ4Wwc")
+            st.caption("Code With Antonio - Next.js + AI Saas")
+
+    # Testers Track
+    with tabs[5]:
+        st.header("🧪 AI Testing, QA & Evaluation")
+        st.info("Testing AI is different from traditional software. It's probabilistic, not deterministic.")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("Evaluating LLMs (Ragas)")
+            st.video("https://www.youtube.com/watch?v=AnrPkl35hLI")
+            st.caption("LangChain - Evaluating RAG Pipelines")
+            
+        with col2:
+            st.subheader("Red Teaming LLMs")
+            st.video("https://www.youtube.com/watch?v=biYMlbzR2Vs")
+            st.caption("Microsoft Actionable AI - Red Teaming Basics")
+            
+        st.markdown("---")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("Prompt Injection Attacks")
+            st.video("https://www.youtube.com/watch?v=zJg5b25qL6c")
+            st.caption("Computerphile - Prompt Injection Explained")
+            
+        with col2:
+            st.subheader("Testing AI Bias & Fairness")
+            st.video("https://www.youtube.com/watch?v=Ug_D8PFDEus")
+            st.caption("Google - Fairness in ML")
     
     # Career
-    with tabs[4]:
+    with tabs[6]:
         st.header("Career in AI/ML")
         
         col1, col2 = st.columns(2)
@@ -180,6 +241,7 @@ def show():
         {"name": "StatQuest - Machine Learning", "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF", "videos": "100+"},
         {"name": "Andrej Karpathy - Neural Networks: Zero to Hero", "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ", "videos": 8},
         {"name": "Sentdex - Machine Learning with Python", "url": "https://www.youtube.com/playlist?list=PLQVvV5Y6nv56qIJGLrhym5dpNW9jSmZzU", "videos": 72},
+        {"name": "LangChain - AI Engineering", "url": "https://www.youtube.com/@LangChain", "videos": "Official"},
     ]
     
     for pl in playlists:

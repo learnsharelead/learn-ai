@@ -390,37 +390,7 @@ nexus_tutor.show()
 
 # --- HOME TAB ---
 if st.session_state.nav_selection == "Home":
-    # --- HERO SECTION ---
-    st.markdown("""
-<div style="text-align: center; padding: 5rem 0 4rem 0; animation: fadein 1s;">
-<!-- Main Title -->
-<h1 style="
-font-size: 5.5rem;
-font-weight: 800;
-letter-spacing: -0.04em;
-margin-bottom: 0.5rem;
-background: linear-gradient(135deg, #111827 0%, #3b82f6 50%, #7c3aed 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-line-height: 1.1;
-filter: drop-shadow(0 2px 10px rgba(59,130,246,0.1));
-">
-Veda AI
-</h1>
-<!-- Subheadline -->
-<p style="
-font-size: 1.6rem;
-color: #4b5563;
-max-width: 900px;
-margin: 0 auto 2rem auto;
-line-height: 1.3;
-font-weight: 500;
-letter-spacing: -0.01em;
-">
-The Ultimate <span style="color: #2563eb; font-weight: 700;">Knowledge Hub</span> for the <span style="background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Artificial Intelligence Revolution</span>.
-</p>
-</div>
-""", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown("---")
     st.markdown("<br>", unsafe_allow_html=True)

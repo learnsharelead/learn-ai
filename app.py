@@ -249,6 +249,75 @@ st.markdown("""
     }
     .bento-blue { background: linear-gradient(135deg, #e0f2ff 0%, #dbeafe 100%); }
     .bento-purple { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); }
+    .bento-orange { background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%); }
+    .bento-green { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); }
+    
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS
+       ========================================================================== */
+    
+    /* Tablets and below (768px) */
+    @media (max-width: 768px) {
+        /* Hero Section - Reduce font sizes */
+        h1[style*="5.5rem"] {
+            font-size: 3rem !important;
+        }
+        
+        p[style*="1.6rem"] {
+            font-size: 1.2rem !important;
+        }
+        
+        /* Reduce padding on hero */
+        div[style*="padding: 5rem"] {
+            padding: 2rem 1rem !important;
+        }
+        
+        /* Make columns stack on mobile */
+        .row-widget.stHorizontalBlock {
+            flex-direction: column !important;
+        }
+        
+        .row-widget.stHorizontalBlock > div {
+            width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        /* Adjust max width for mobile */
+        .block-container {
+            max-width: 100% !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+    }
+    
+    /* Mobile phones (480px and below) */
+    @media (max-width: 480px) {
+        /* Hero - Even smaller */
+        h1[style*="5.5rem"] {
+            font-size: 2.2rem !important;
+        }
+        
+        p[style*="1.6rem"] {
+            font-size: 1rem !important;
+        }
+        
+        /* Compact padding */
+        div[style*="padding: 5rem"] {
+            padding: 1.5rem 0.5rem !important;
+        }
+        
+        /* Tabs wrap better */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-wrap: wrap !important;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            max-width: none !important;
+            flex-grow: 1;
+            min-width: 100px;
+        }
+    }
+    .bento-purple { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); }
     .bento-green { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
     .bento-orange { background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%); }
     
@@ -379,14 +448,15 @@ transition: transform 0.2s ease;
         {"icon": "🧠", "title": "Research", "desc": "Papers & Reference", "bg": "#f0fdf4", "border": "#bbf7d0", "shadow": "rgba(16, 185, 129, 0.1)", "target": "📑 Reference"}
     ]
     
-    # 4 Columns
-    cols = st.columns(4, gap="small")
+    # Responsive Grid: 4 columns on desktop, automatically stacks on mobile
+    cols = st.columns(4, gap="medium")
     
     for i, mod in enumerate(modules_map):
-        with cols[i]:
+        col_index = i % 4  # Distribute across 4 columns
+        with cols[col_index]:
             # Static Card (No cursor pointer)
             st.markdown(f"""
-            <div style="background: {mod['bg']}; border: 1px solid {mod['border']}; padding: 15px; border-radius: 12px; height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 2px 5px {mod['shadow']};">
+            <div style="background: {mod['bg']}; border: 1px solid {mod['border']}; padding: 15px; border-radius: 12px; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 2px 5px {mod['shadow']};">
                 <div style="font-size: 2rem; margin-bottom: 5px;">{mod['icon']}</div>
                 <div style="font-weight: 700; color: #111; font-size: 1rem; margin-bottom: 2px;">{mod['title']}</div>
                 <div style="font-size: 0.8rem; color: #666; line-height: 1.2;">{mod['desc']}</div>
